@@ -1,11 +1,13 @@
 package me.scarletleaf1000.sunworks.worldgen;
 
 import me.scarletleaf1000.sunworks.Sunworks;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.neoforged.neoforge.common.world.BiomeModifier;
@@ -42,8 +44,9 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS
         ));
 
+        Holder<Biome> endHighlands = biomes.getOrThrow(ResourceKey.create(Registries.BIOME, ResourceLocation.withDefaultNamespace("end_highlands")));
         context.register(ADD_DEAD_CHORUS_PLANT, new BiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_END),
+                HolderSet.direct(endHighlands),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.DEAD_CHORUS_PLANT_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));

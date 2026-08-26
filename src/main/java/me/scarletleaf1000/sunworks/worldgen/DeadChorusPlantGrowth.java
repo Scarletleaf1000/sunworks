@@ -87,18 +87,4 @@ public class DeadChorusPlantGrowth {
         BlockState state = level.getBlockState(pos);
         return state.is(Blocks.END_STONE) || state.is(Blocks.CHORUS_PLANT) || state.is(Blocks.CHORUS_FLOWER);
     }
-
-    public static boolean hasAdjacentWitherRose(LevelAccessor level, BlockPos pos) {
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dz = -1; dz <= 1; dz++) {
-                if (dx == 0 && dz == 0) {
-                    continue;
-                }
-                if (level.getBlockState(pos.offset(dx, 0, dz)).is(Blocks.WITHER_ROSE)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }
