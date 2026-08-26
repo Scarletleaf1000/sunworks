@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class ThrownCorruptedPearl extends ThrowableItemProjectile {
@@ -61,6 +62,16 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
         Level level = owner.level();
         spawnTeleportEffects(level, destX, destY + owner.getBbHeight() / 2.0, destZ);
         spawnTeleportEffects(level, sourceX, sourceY + hit.getBbHeight() / 2.0, sourceZ);
+        this.discard();
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
+
+        if (this.level().isClientSide) return;
+
+        this.discard();
     }
 
     private static void teleportEntity(Entity entity, double x, double y, double z) {
