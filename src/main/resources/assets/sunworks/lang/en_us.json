@@ -12,6 +12,7 @@
   "item.sunworks.heat_core": "Heat Core",
   "item.sunworks.solar_panel_component": "Solar Panel Component",
   "item.sunworks.chorus_husk": "Chorus Husk",
+  "item.sunworks.corrupted_pearl": "Corrupted Pearl",
 
   "block.sunworks.heliolite_block": "Heliolite Block",
   "block.sunworks.budding_heliolite": "Budding Heliolite Block",
@@ -43,6 +44,7 @@
 
   "recipe.sunworks.alloy_smelting": "Alloy Smelting",
   "info.sunworks.chorus_husk": "Throw chorus fruit into a wither rose to create.",
+  "info.sunworks.corrupted_pearl": "Teleports hit entity to the thrower's location.",
 
   "itemGroup.sunworks.item_tab": "Sunworks Items",
   "itemGroup.sunworks.block_tab": "Sunworks Blocks",

@@ -1,6 +1,7 @@
 package me.scarletleaf1000.sunworks.item;
 
 import me.scarletleaf1000.sunworks.Sunworks;
+import me.scarletleaf1000.sunworks.item.custom.CorruptedPearlItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -45,6 +46,8 @@ public class ModItems {
                     .alwaysEdible()
                     .effect(new MobEffectInstance(MobEffects.WITHER, 60, 0), 1.0f)
                     .build()));
+    public static final DeferredItem<Item> CORRUPTED_PEARL = ITEMS.registerItem("corrupted_pearl",
+            CorruptedPearlItem::new, new Item.Properties().stacksTo(16));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

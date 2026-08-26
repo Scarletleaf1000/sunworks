@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks;
 import com.mojang.logging.LogUtils;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.recipe.ModRecipes;
@@ -24,7 +25,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -50,6 +53,7 @@ public class Sunworks {
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -100,6 +104,11 @@ public class Sunworks {
             e.register(ModMenuTypes.ALLOY_SMELTER_MENU.get(), AlloySmelterScreen::new);
             e.register(ModMenuTypes.SOLAR_ALLOY_SMELTER_MENU.get(), SolarAlloySmelterScreen::new);
             e.register(ModMenuTypes.SOLAR_PANEL_MENU.get(), SolarPanelScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(ModEntityTypes.CORRUPTED_PEARL.get(), ThrownItemRenderer::new);
         }
     }
 }

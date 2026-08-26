@@ -45,6 +45,7 @@ public class JEISunworksPlugin implements IModPlugin {
         registration.addRecipes(AlloySmeltingRecipeCategory.ALLOY_SMELTING_RECIPE_TYPE, alloySmelterRecipes);
 
         registration.addIngredientInfo(ModItems.CHORUS_HUSK.get(), Component.translatable("info.sunworks.chorus_husk"));
+        registration.addIngredientInfo(ModItems.CORRUPTED_PEARL.get(), Component.translatable("info.sunworks.corrupted_pearl"));
     }
 
     @Override

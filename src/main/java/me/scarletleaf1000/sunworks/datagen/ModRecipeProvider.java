@@ -5,10 +5,7 @@ import me.scarletleaf1000.sunworks.block.custom.cable.CableTier;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -132,6 +129,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('F', Items.FURNACE)
                 .define('C', Items.COBBLESTONE)
                 .unlockedBy("has_blast_furnace", has(Items.BLAST_FURNACE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.CORRUPTED_PEARL.get(), 1)
+                .requires(ModItems.CHORUS_HUSK.get())
+                .requires(Items.ENDER_PEARL)
+                .unlockedBy("has_chorus_husk", has(ModItems.CHORUS_HUSK.get()))
                 .save(recipeOutput);
     }
 
