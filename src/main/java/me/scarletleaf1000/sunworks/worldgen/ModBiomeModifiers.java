@@ -18,6 +18,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_CINDERITE_ORE = registerKey("add_cinderite_ore");
 
     public static final ResourceKey<BiomeModifier> ADD_HELIOLITE_GEODE = registerKey("add_heliolite_geode");
+    public static final ResourceKey<BiomeModifier> ADD_DEAD_CHORUS_PLANT = registerKey("add_dead_chorus_plant");
 
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
@@ -39,6 +40,12 @@ public class ModBiomeModifiers {
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.HELIOLITE_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS
+        ));
+
+        context.register(ADD_DEAD_CHORUS_PLANT, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_END),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.DEAD_CHORUS_PLANT_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 
     }

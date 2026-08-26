@@ -7,6 +7,7 @@ import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.recipe.ModRecipes;
 import me.scarletleaf1000.sunworks.screen.ModMenuTypes;
+import me.scarletleaf1000.sunworks.worldgen.ModFeatures;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
@@ -48,6 +49,7 @@ public class Sunworks {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModFeatures.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
 

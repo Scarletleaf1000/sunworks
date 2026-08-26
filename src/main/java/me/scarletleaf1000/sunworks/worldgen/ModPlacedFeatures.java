@@ -19,6 +19,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CINDERITE_ORE_PLACED_KEY = registerKey("cinderite_ore_placed");
 
     public static final ResourceKey<PlacedFeature> HELIOLITE_GEODE_PLACED_KEY = registerKey("heliolite_geode_placed");
+    public static final ResourceKey<PlacedFeature> DEAD_CHORUS_PLANT_PLACED_KEY = registerKey("dead_chorus_plant_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -31,6 +32,11 @@ public class ModPlacedFeatures {
         register(context, HELIOLITE_GEODE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.HELIOLITE_GEODE_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(50), InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(50)),
+                        BiomeFilter.biome()));
+
+        register(context, DEAD_CHORUS_PLANT_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DEAD_CHORUS_PLANT_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(5), CountPlacement.of(2), InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(80)),
                         BiomeFilter.biome()));
     }
 

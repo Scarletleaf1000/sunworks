@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -30,6 +31,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CINDERITE_ORE_KEY = registerKey("cinderite_ore");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HELIOLITE_GEODE_KEY = registerKey("heliolite_geode");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DEAD_CHORUS_PLANT_KEY = registerKey("dead_chorus_plant");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -67,6 +69,8 @@ public class ModConfiguredFeatures {
                         true, UniformInt.of(4, 6),
                         UniformInt.of(3, 4), UniformInt.of(1, 2),
                         -16, 16, 0.05D, 1));
+
+        register(context, DEAD_CHORUS_PLANT_KEY, ModFeatures.DEAD_CHORUS_PLANT.get(), NoneFeatureConfiguration.INSTANCE);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
