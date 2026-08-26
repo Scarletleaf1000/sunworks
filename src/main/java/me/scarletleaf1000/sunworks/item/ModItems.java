@@ -1,6 +1,9 @@
 package me.scarletleaf1000.sunworks.item;
 
 import me.scarletleaf1000.sunworks.Sunworks;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -34,6 +37,14 @@ public class ModItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> SOLAR_PANEL_COMPONENT = ITEMS.registerItem("solar_panel_component",
             Item::new, new Item.Properties());
+
+    public static final DeferredItem<Item> CHORUS_HUSK = ITEMS.registerItem("chorus_husk",
+            Item::new, new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(1)
+                    .saturationModifier(0.25f)
+                    .alwaysEdible()
+                    .effect(new MobEffectInstance(MobEffects.WITHER, 60, 0), 1.0f)
+                    .build()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
