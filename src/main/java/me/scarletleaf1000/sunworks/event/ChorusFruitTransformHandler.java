@@ -39,8 +39,8 @@ public class ChorusFruitTransformHandler {
             return;
         }
 
-        BlockPos below = entity.blockPosition().below();
-        if (!level.getBlockState(below).is(Blocks.WITHER_ROSE)) {
+        BlockPos pos = entity.blockPosition();
+        if (!level.getBlockState(pos).is(Blocks.WITHER_ROSE)) {
             return;
         }
 

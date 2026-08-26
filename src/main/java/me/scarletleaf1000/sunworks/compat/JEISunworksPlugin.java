@@ -2,6 +2,7 @@ package me.scarletleaf1000.sunworks.compat;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
+import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.recipe.ModRecipes;
 import me.scarletleaf1000.sunworks.recipe.custom.AlloySmelterRecipe;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
@@ -14,6 +15,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -41,6 +43,8 @@ public class JEISunworksPlugin implements IModPlugin {
         List<AlloySmelterRecipe> alloySmelterRecipes = recipeManager
                 .getAllRecipesFor(ModRecipes.ALLOY_SMELTER_TYPE.get()).stream().map(RecipeHolder::value).toList();
         registration.addRecipes(AlloySmeltingRecipeCategory.ALLOY_SMELTING_RECIPE_TYPE, alloySmelterRecipes);
+
+        registration.addIngredientInfo(ModItems.CHORUS_HUSK.get(), Component.translatable("info.sunworks.chorus_husk"));
     }
 
     @Override
