@@ -38,6 +38,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.SOLAR_ALLOY_SMELTER.get());
         dropSelf(ModBlocks.ALLOY_SMELTER.get());
         dropSelf(ModBlocks.SOLAR_PANEL.get());
+        dropOther(ModBlocks.DEAD_CHORUS_PLANT.get(), ModItems.CHORUS_HUSK.get());
 
         for (CableTier tier : CableTier.values()) {
             dropSelf(ModBlocks.ENERGY_PIPES.get(tier).get());

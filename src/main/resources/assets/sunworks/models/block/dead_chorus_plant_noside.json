@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/chorus_plant_noside",
+  "textures": {
+    "texture": "sunworks:block/dead_chorus_plant",
+    "inside": "sunworks:block/dead_chorus_plant",
+    "particle": "sunworks:block/dead_chorus_plant"
+  }
+}

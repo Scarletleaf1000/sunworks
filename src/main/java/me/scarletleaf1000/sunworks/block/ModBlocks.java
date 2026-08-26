@@ -14,6 +14,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChorusPlantBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
@@ -80,6 +81,11 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)
                     .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<ChorusPlantBlock> DEAD_CHORUS_PLANT = registerBlock("dead_chorus_plant",
+            () -> new ChorusPlantBlock(BlockBehaviour.Properties.of()
+                    .strength(0.4f)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()));
 
     public static final DeferredBlock<Block> SOLAR_ALLOY_SMELTER = registerBlock("solar_alloy_smelter",
             () -> new SolarAlloySmelterBlock(BlockBehaviour.Properties.of()
