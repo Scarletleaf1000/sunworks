@@ -121,23 +121,23 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REFLECTION_PANEL.get())
-                .pattern("GGG")
-                .pattern("GSG")
-                .pattern("I I")
-                .define('G', Items.GLASS_PANE)
-                .define('S', ModItems.SOLAR_PANEL_COMPONENT.get())
+                .pattern("sss")
+                .pattern("sSs")
+                .pattern("SIS")
+                .define('s', ModItems.SILICON.get())
+                .define('S', ModItems.SILICON.get())
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_solar_panel_component", has(ModItems.SOLAR_PANEL_COMPONENT.get()))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.HELIORECEIVER.get())
-                .pattern("III")
-                .pattern("ISI")
-                .pattern("IEI")
-                .define('I', Items.IRON_INGOT)
+                .pattern("HSH")
+                .pattern("SAS")
+                .pattern("HSH")
+                .define('H', ModItems.HEAT_CORE.get())
                 .define('S', ModItems.SOLAR_PANEL_COMPONENT.get())
-                .define('E', ModItems.ELECTRUM_INGOT.get())
-                .unlockedBy("has_solar_panel_component", has(ModItems.SOLAR_PANEL_COMPONENT.get()))
+                .define('A', ModBlocks.ADVANCED_MACHINE_CASING.get().asItem())
+                .unlockedBy("has_advanced_machine_casing", has(ModBlocks.ADVANCED_MACHINE_CASING.get().asItem()))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ALLOY_SMELTER.get())

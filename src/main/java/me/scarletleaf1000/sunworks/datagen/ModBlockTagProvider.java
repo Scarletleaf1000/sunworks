@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.html.HTML;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
@@ -24,14 +25,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.HELIOLITE_BLOCK.get())
-                .add(ModBlocks.BUDDING_HELIOLITE.get())
-                .add(ModBlocks.HELIOLITE_CLUSTER.get())
-                .add(ModBlocks.LARGE_HELIOLITE_BUD.get())
-                .add(ModBlocks.MEDIUM_HELIOLITE_BUD.get())
-                .add(ModBlocks.SMALL_HELIOLITE_BUD.get());
-
         this.tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.HELIOLITE_BLOCK.get())
                 .add(ModBlocks.BUDDING_HELIOLITE.get())
@@ -46,6 +39,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         ;
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.HELIOLITE_BLOCK.get())
+                .add(ModBlocks.BUDDING_HELIOLITE.get())
+                .add(ModBlocks.HELIOLITE_CLUSTER.get())
+                .add(ModBlocks.LARGE_HELIOLITE_BUD.get())
+                .add(ModBlocks.MEDIUM_HELIOLITE_BUD.get())
+                .add(ModBlocks.SMALL_HELIOLITE_BUD.get())
                 .add(ModBlocks.CINDERITE_ORE.get())
                 .add(ModBlocks.DEEPSLATE_CINDERITE_ORE.get())
                 .add(ModBlocks.SILVER_ORE.get())
@@ -59,6 +58,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.ALLOY_SMELTER.get())
                 .add(ModBlocks.REFLECTION_PANEL.get())
                 .add(ModBlocks.HELIORECEIVER.get())
+                .add(ModBlocks.SIMPLE_MACHINE_CASING.get())
+                .add(ModBlocks.ADVANCED_MACHINE_CASING.get())
+                .add(ModBlocks.ULTIMATE_MACHINE_CASING.get())
         ;
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
@@ -95,7 +97,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(STORAGE_BLOCKS_SILVER)
                 .addTag(STORAGE_BLOCKS_RAW_CINDERITE)
                 .addTag(STORAGE_BLOCKS_RAW_SILVER)
-                .addTag(STORAGE_BLOCKS_ELECTRUM);
+                .addTag(STORAGE_BLOCKS_ELECTRUM)
+        ;
         this.tag(STORAGE_BLOCKS_CINDERITE)
                 .add(ModBlocks.CINDERITE_BLOCK.get());
         this.tag(STORAGE_BLOCKS_SILVER)
@@ -106,6 +109,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_SILVER_BLOCK.get());
         this.tag(STORAGE_BLOCKS_ELECTRUM)
                 .add(ModBlocks.ELECTRUM_BLOCK.get());
+        this.tag(MACHINE_CASING)
+                .add(ModBlocks.SIMPLE_MACHINE_CASING.get())
+                .add(ModBlocks.ADVANCED_MACHINE_CASING.get())
+                .add(ModBlocks.ULTIMATE_MACHINE_CASING.get())
+        ;
     }
 
     public static final TagKey<Block> ORES_CINDERITE = commonTag("ores/cinderite");
@@ -115,6 +123,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     public static final TagKey<Block> STORAGE_BLOCKS_RAW_CINDERITE = commonTag("storage_blocks/raw_cinderite");
     public static final TagKey<Block> STORAGE_BLOCKS_RAW_SILVER = commonTag("storage_blocks/raw_silver");
     public static final TagKey<Block> STORAGE_BLOCKS_ELECTRUM = commonTag("storage_blocks/electrum");
+    public static final TagKey<Block> MACHINE_CASING = modTag("machine_casing");
+
+    private static TagKey<Block> modTag(String path) {
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID, path));
+    }
 
     private static TagKey<Block> commonTag(String path) {
         return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", path));

@@ -80,7 +80,7 @@ public class ReflectionPanelBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof ReflectionPanelBlockEntity panel) {
-            //panel.setTarget(pos.relative(hit.getDirection()));
+            panel.renderTarget(player);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }

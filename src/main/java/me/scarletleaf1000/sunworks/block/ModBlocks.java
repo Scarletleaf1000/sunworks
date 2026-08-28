@@ -60,6 +60,22 @@ public class ModBlocks {
     public static final DeferredBlock<Block> SILVER_ORE = registerOre("silver_ore", false);
     public static final DeferredBlock<Block> DEEPSLATE_SILVER_ORE = registerOre("deepslate_silver_ore", true);
 
+    public static final DeferredBlock<Block> SIMPLE_MACHINE_CASING = registerBlock("simple_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> ADVANCED_MACHINE_CASING = registerBlock("advanced_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> ULTIMATE_MACHINE_CASING = registerBlock("ultimate_machine_casing",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+
     public static final DeferredBlock<Block> CINDERITE_BLOCK = registerBlock("cinderite_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)

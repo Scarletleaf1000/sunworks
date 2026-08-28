@@ -36,6 +36,9 @@
   "block.sunworks.reflection_panel": "Reflection Panel",
   "block.sunworks.helioreceiver": "Helioreceiver",
   "block.sunworks.dead_chorus_plant": "Dead Chorus Plant",
+  "block.sunworks.simple_machine_casing": "Simple Machine Casing",
+  "block.sunworks.advanced_machine_casing": "Advanced Machine Casing",
+  "block.sunworks.ultimate_machine_casing": "Ultimate Machine Casing",
 
   "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",
   "tooltip.sunworks.helioreceiver.description": "Generates power from linked reflection panels.",
@@ -59,6 +62,7 @@
   "message.sunworks.wrench.formed": "Link formed",
   "message.sunworks.wrench.failed": "Link failed",
   "message.sunworks.wrench.discarded": "Selection discarded",
+  "message.sunworks.panel.notarget": "This panel has no target",
 
   "tooltip.sunworks.hold_shift": "Hold SHIFT for details",
   "tooltip.sunworks.power_transfer_rate": "Power Transfer Rate: %s FE/t",
