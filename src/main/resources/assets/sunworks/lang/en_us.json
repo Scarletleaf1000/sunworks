@@ -59,6 +59,7 @@
   "message.sunworks.wrench.formed": "Link formed",
   "message.sunworks.wrench.failed": "Link failed",
   "message.sunworks.wrench.discarded": "Selection discarded",
+  "message.sunworks.panel.notarget": "This panel has no target",
 
   "tooltip.sunworks.hold_shift": "Hold SHIFT for details",
   "tooltip.sunworks.power_transfer_rate": "Power Transfer Rate: %s FE/t",
