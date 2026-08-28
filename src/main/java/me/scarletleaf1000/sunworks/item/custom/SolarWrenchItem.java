@@ -6,8 +6,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -38,39 +40,58 @@ public class SolarWrenchItem extends Item {
             return InteractionResult.PASS;
         }
 
-        if (level.getBlockState(clicked).is(ModBlocks.REFLECTION_PANEL.get())) {
-            if (player.isShiftKeyDown()) {
-                if (!level.isClientSide()) {
-                    setSelected(stack, clicked);
-                }
-                return InteractionResult.sidedSuccess(level.isClientSide());
-            }
+        if (!player.isShiftKeyDown()) {
+            return InteractionResult.PASS;
         }
 
-        if (player.isShiftKeyDown()) {
-            BlockPos selected = getSelected(stack);
-            if (selected != null && !selected.equals(clicked)
-                    && level.getBlockState(clicked).is(ModBlocks.HELIORECEIVER.get())) {
-                if (level.getBlockEntity(selected) instanceof ReflectionPanelBlockEntity panel) {
-                    if (!level.isClientSide()) {
-                        Vec3 panelCenter = selected.getCenter();
-                        Vec3 targetCenter = clicked.getCenter();
-                        Vec3 dir = targetCenter.subtract(panelCenter).normalize();
-                        if (dir.y >= MIN_COS
-                                && selected.distSqr(clicked) <= (long) MAX_LINK_DISTANCE * MAX_LINK_DISTANCE) {
-                            panel.setTarget(clicked);
-                            if (level instanceof ServerLevel serverLevel) {
-                                spawnConnectionParticles(serverLevel, selected, clicked);
-                            }
+        boolean clickedPanel = level.getBlockState(clicked).is(ModBlocks.REFLECTION_PANEL.get());
+        boolean clickedReceiver = level.getBlockState(clicked).is(ModBlocks.HELIORECEIVER.get());
+
+        if (clickedPanel) {
+            if (!level.isClientSide()) {
+                BlockPos previous = getSelected(stack);
+                setSelected(stack, clicked);
+                if (previous != null && !previous.equals(clicked)) {
+                    actionBarMessage(player, "message.sunworks.wrench.discarded", ChatFormatting.YELLOW);
+                }
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        if (clickedReceiver) {
+            if (!level.isClientSide()) {
+                BlockPos selected = getSelected(stack);
+                if (selected == null || !(level.getBlockEntity(selected) instanceof ReflectionPanelBlockEntity panel)) {
+                    actionBarMessage(player, "message.sunworks.wrench.failed", ChatFormatting.RED);
+                } else {
+                    Vec3 panelCenter = selected.getCenter();
+                    Vec3 targetCenter = clicked.getCenter();
+                    Vec3 dir = targetCenter.subtract(panelCenter).normalize();
+                    if (dir.y >= MIN_COS
+                            && selected.distSqr(clicked) <= (long) MAX_LINK_DISTANCE * MAX_LINK_DISTANCE) {
+                        panel.setTarget(clicked);
+                        if (level instanceof ServerLevel serverLevel) {
+                            spawnConnectionParticles(serverLevel, selected, clicked);
                         }
-                        clearSelected(stack);
+                        actionBarMessage(player, "message.sunworks.wrench.formed", ChatFormatting.GREEN);
+                    } else {
+                        actionBarMessage(player, "message.sunworks.wrench.failed", ChatFormatting.RED);
                     }
-                    return InteractionResult.sidedSuccess(level.isClientSide());
+                    clearSelected(stack);
                 }
             }
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        return InteractionResult.PASS;
+        if (!level.isClientSide() && getSelected(stack) != null) {
+            clearSelected(stack);
+            actionBarMessage(player, "message.sunworks.wrench.discarded", ChatFormatting.YELLOW);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    private static void actionBarMessage(Player player, String key, ChatFormatting color) {
+        player.displayClientMessage(Component.translatable(key).withStyle(color), true);
     }
 
     @Override

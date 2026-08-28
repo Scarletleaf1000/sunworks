@@ -56,6 +56,10 @@
   "itemGroup.sunworks.item_tab": "Sunworks Items",
   "itemGroup.sunworks.block_tab": "Sunworks Blocks",
 
+  "message.sunworks.wrench.formed": "Link formed",
+  "message.sunworks.wrench.failed": "Link failed",
+  "message.sunworks.wrench.discarded": "Selection discarded",
+
   "tooltip.sunworks.hold_shift": "Hold SHIFT for details",
   "tooltip.sunworks.power_transfer_rate": "Power Transfer Rate: %s FE/t",
   "tooltip.sunworks.solar_panel.power_generation": "Maximum Power Generation: 30 FE/t",
