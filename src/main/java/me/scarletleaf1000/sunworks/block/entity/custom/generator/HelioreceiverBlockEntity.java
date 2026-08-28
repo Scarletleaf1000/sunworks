@@ -1,8 +1,10 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
 import me.scarletleaf1000.sunworks.block.ModBlocks;
+import me.scarletleaf1000.sunworks.block.custom.cable.AbstractPipeBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
+import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
 import me.scarletleaf1000.sunworks.block.entity.io.ConfigurableMachine;
 import me.scarletleaf1000.sunworks.block.entity.io.IOType;
 import me.scarletleaf1000.sunworks.block.entity.io.RelativeSide;
@@ -47,6 +49,7 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
 
     private final SideConfiguration sideConfiguration = new SideConfiguration();
     private final List<BlockPos> connectedPanels = new ArrayList<>();
+    private boolean ejectEnabled = false;
     private int scanCooldown = 0;
 
     public HelioreceiverBlockEntity(BlockPos pos, BlockState state) {
@@ -135,6 +138,25 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
         return true;
     }
 
+    @Override
+    public boolean supportsEject() {
+        return true;
+    }
+
+    @Override
+    public boolean isEjectEnabled() {
+        return ejectEnabled;
+    }
+
+    @Override
+    public void setEjectEnabled(boolean enabled) {
+        this.ejectEnabled = enabled;
+        setChanged();
+        if (level != null) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
+    }
+
     public void tick(Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide) return;
 
@@ -143,6 +165,7 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
             scanReflectors(level, pos, state);
         }
         generatePower(level);
+        ejectEnergy(level, pos);
     }
 
     private void generatePower(Level level) {
@@ -154,6 +177,20 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
         }
         if (fe > 0) {
             ENERGY_STORAGE.receiveEnergy(fe, false);
+        }
+    }
+
+    private void ejectEnergy(Level level, BlockPos pos) {
+        if (!ejectEnabled) return;
+
+        for (RelativeSide side : RelativeSide.values()) {
+            if (sideConfiguration.get(side) != IOType.ENERGY_OUTPUT) continue;
+
+            Direction absolute = side.toAbsolute(getFacing());
+            BlockPos neighborPos = pos.relative(absolute);
+            if (level.getBlockState(neighborPos).getBlock() instanceof AbstractPipeBlock) continue;
+
+            ModEnergyUtil.move(pos, neighborPos, MAX_TRANSFER, level);
         }
     }
 
@@ -200,6 +237,7 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("helioreceiver.energy", ENERGY_STORAGE.getEnergyStored());
+        tag.putBoolean("helioreceiver.eject_enabled", ejectEnabled);
         CompoundTag sideConfigTag = new CompoundTag();
         sideConfiguration.save(sideConfigTag);
         tag.put("side_config", sideConfigTag);
@@ -209,6 +247,7 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         ENERGY_STORAGE.setEnergy(tag.getInt("helioreceiver.energy"));
+        ejectEnabled = tag.getBoolean("helioreceiver.eject_enabled");
         if (tag.contains("side_config")) {
             sideConfiguration.load(tag.getCompound("side_config"));
         }
