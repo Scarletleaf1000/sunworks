@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                     .icon(() -> new ItemStack(ModItems.HELIOLITE_SHARD.get()))
                     //.withSearchBar()
                     .displayItems((parameters, output) -> {
+                        output.accept(ModItems.SOLAR_WRENCH);
                         output.accept(ModItems.HELIOLITE_SHARD);
                         output.accept(ModItems.CINDERITE_INGOT);
                         output.accept(ModItems.CINDERITE_NUGGET);
@@ -68,6 +69,7 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.ALLOY_SMELTER);
                        output.accept(ModBlocks.SOLAR_PANEL);
                        output.accept(ModBlocks.REFLECTION_PANEL);
+                       output.accept(ModBlocks.HELIORECEIVER);
                        output.accept(ModBlocks.DEAD_CHORUS_PLANT);
 
                        ModBlocks.ENERGY_PIPES.values().forEach(output::accept);

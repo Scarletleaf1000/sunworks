@@ -2,6 +2,7 @@ package me.scarletleaf1000.sunworks.screen;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterMenu;
+import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverMenu;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterMenu;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelMenu;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +24,8 @@ public class ModMenuTypes {
             registerMenuType("solar_alloy_smelter_menu", SolarAlloySmelterMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<SolarPanelMenu>> SOLAR_PANEL_MENU =
             registerMenuType("solar_panel_menu", SolarPanelMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<HelioreceiverMenu>> HELIORECEIVER_MENU =
+            registerMenuType("helioreceiver_menu", HelioreceiverMenu::new);
 
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,

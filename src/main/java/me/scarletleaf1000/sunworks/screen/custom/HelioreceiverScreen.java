@@ -16,15 +16,15 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;
 
-public class SolarPanelScreen extends AbstractContainerScreen<SolarPanelMenu> {
+public class HelioreceiverScreen extends AbstractContainerScreen<HelioreceiverMenu> {
     private static final ResourceLocation GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID,"textures/gui/container/basic_energy_storage.png");
+            ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID, "textures/gui/container/basic_energy_storage.png");
 
     private EnergyDisplayTooltipArea energyInfoArea;
     private ConfigurationTabButton configTab;
     private ConfigurationPanelWidget configPanel;
 
-    public SolarPanelScreen(SolarPanelMenu menu, Inventory playerInventory, Component title) {
+    public HelioreceiverScreen(HelioreceiverMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 
@@ -90,7 +90,7 @@ public class SolarPanelScreen extends AbstractContainerScreen<SolarPanelMenu> {
     }
 
     private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 83, 11, 8, 64)) {
+        if (isMouseAboveArea(pMouseX, pMouseY, x, y, 83, 11, 8, 64)) {
             guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }

@@ -48,6 +48,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.SOLAR_PANEL.get(), models().getExistingFile(modLoc("block/solar_panel")));
         simpleBlock(ModBlocks.REFLECTION_PANEL.get(), models().getExistingFile(modLoc("block/reflection_panel_base")));
+        simpleBlockWithItem(ModBlocks.HELIORECEIVER.get(),
+                models().cubeAll("block/helioreceiver", modLoc("block/helioreceiver")));
 
         clusterBlock(ModBlocks.HELIOLITE_CLUSTER);
         clusterBlock(ModBlocks.LARGE_HELIOLITE_BUD);

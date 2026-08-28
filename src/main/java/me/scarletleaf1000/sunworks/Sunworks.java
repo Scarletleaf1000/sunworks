@@ -11,6 +11,7 @@ import me.scarletleaf1000.sunworks.recipe.ModRecipes;
 import me.scarletleaf1000.sunworks.screen.ModMenuTypes;
 import me.scarletleaf1000.sunworks.worldgen.ModFeatures;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
+import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
 import net.minecraft.client.Minecraft;
@@ -108,6 +109,7 @@ public class Sunworks {
             e.register(ModMenuTypes.ALLOY_SMELTER_MENU.get(), AlloySmelterScreen::new);
             e.register(ModMenuTypes.SOLAR_ALLOY_SMELTER_MENU.get(), SolarAlloySmelterScreen::new);
             e.register(ModMenuTypes.SOLAR_PANEL_MENU.get(), SolarPanelScreen::new);
+            e.register(ModMenuTypes.HELIORECEIVER_MENU.get(), HelioreceiverScreen::new);
         }
 
         @SubscribeEvent

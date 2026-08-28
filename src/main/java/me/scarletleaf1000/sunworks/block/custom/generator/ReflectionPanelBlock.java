@@ -78,17 +78,9 @@ public class ReflectionPanelBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.setPlacedBy(level, pos, state, placer, stack);
-        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof ReflectionPanelBlockEntity panel) {
-            panel.setTarget(pos.relative(state.getValue(FACING)));
-        }
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof ReflectionPanelBlockEntity panel) {
-            panel.setTarget(pos.relative(hit.getDirection()));
+            //panel.setTarget(pos.relative(hit.getDirection()));
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }

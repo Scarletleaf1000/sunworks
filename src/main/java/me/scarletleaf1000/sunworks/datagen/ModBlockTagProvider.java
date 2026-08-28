@@ -58,6 +58,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SOLAR_ALLOY_SMELTER.get())
                 .add(ModBlocks.ALLOY_SMELTER.get())
                 .add(ModBlocks.REFLECTION_PANEL.get())
+                .add(ModBlocks.HELIORECEIVER.get())
         ;
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)

@@ -130,6 +130,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_solar_panel_component", has(ModItems.SOLAR_PANEL_COMPONENT.get()))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.HELIORECEIVER.get())
+                .pattern("III")
+                .pattern("ISI")
+                .pattern("IEI")
+                .define('I', Items.IRON_INGOT)
+                .define('S', ModItems.SOLAR_PANEL_COMPONENT.get())
+                .define('E', ModItems.ELECTRUM_INGOT.get())
+                .unlockedBy("has_solar_panel_component", has(ModItems.SOLAR_PANEL_COMPONENT.get()))
+                .save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ALLOY_SMELTER.get())
                 .pattern("IBI")
                 .pattern("IFI")

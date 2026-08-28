@@ -13,6 +13,7 @@
   "item.sunworks.solar_panel_component": "Solar Panel Component",
   "item.sunworks.chorus_husk": "Chorus Husk",
   "item.sunworks.corrupted_pearl": "Corrupted Pearl",
+  "item.sunworks.solar_wrench": "Solar Wrench",
 
   "block.sunworks.heliolite_block": "Heliolite Block",
   "block.sunworks.budding_heliolite": "Budding Heliolite Block",
@@ -33,9 +34,11 @@
   "block.sunworks.alloy_smelter": "Alloy Smelter",
   "block.sunworks.solar_panel": "Solar Panel",
   "block.sunworks.reflection_panel": "Reflection Panel",
+  "block.sunworks.helioreceiver": "Helioreceiver",
   "block.sunworks.dead_chorus_plant": "Dead Chorus Plant",
 
   "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",
+  "tooltip.sunworks.helioreceiver.description": "Generates power from linked reflection panels.",
 
   "block.sunworks.energy_pipe_basic": "Basic Energy Pipe",
   "block.sunworks.energy_pipe_standard": "Standard Energy Pipe",
@@ -44,6 +47,7 @@
   "block.menu.sunworks.solar_alloy_smelter": "Simple Solar Alloy Smelter",
   "block.menu.sunworks.alloy_smelter": "Alloy Smelter",
   "block.menu.sunworks.solar_panel": "Solar Panel",
+  "block.menu.sunworks.helioreceiver": "Helioreceiver",
 
   "recipe.sunworks.alloy_smelting": "Alloy Smelting",
   "info.sunworks.chorus_husk": "Throw chorus fruit into a wither rose to create.",

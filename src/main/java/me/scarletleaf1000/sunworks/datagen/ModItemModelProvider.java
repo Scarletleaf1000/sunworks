@@ -32,6 +32,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.SOLAR_PANEL_COMPONENT.get());
         basicItem(ModItems.CHORUS_HUSK.get());
         basicItem(ModItems.CORRUPTED_PEARL.get());
+        basicItem(ModItems.SOLAR_WRENCH.get());
 
         clusterItem(ModBlocks.HELIOLITE_CLUSTER);
         clusterItem(ModBlocks.LARGE_HELIOLITE_BUD);

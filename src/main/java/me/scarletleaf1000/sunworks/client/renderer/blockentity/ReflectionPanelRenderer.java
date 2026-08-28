@@ -22,6 +22,7 @@ public class ReflectionPanelRenderer implements BlockEntityRenderer<ReflectionPa
     private static final float PIVOT_X = 0.5f;
     private static final float PIVOT_Y = 0.5f;
     private static final float PIVOT_Z = 0.5f;
+    private static final double MIN_COS = Math.cos(Math.toRadians(80));
 
     private final BakedModel panelModel;
 
@@ -42,7 +43,7 @@ public class ReflectionPanelRenderer implements BlockEntityRenderer<ReflectionPa
         Vec3 targetCenter = target.getCenter();
         Vec3 dir = targetCenter.subtract(panelCenter).normalize();
 
-        if (dir.y < 0) {
+        if (dir.y < MIN_COS) {
             return;
         }
 
