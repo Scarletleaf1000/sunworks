@@ -32,7 +32,10 @@
   "block.sunworks.solar_alloy_smelter": "Simple Solar Alloy Smelter",
   "block.sunworks.alloy_smelter": "Alloy Smelter",
   "block.sunworks.solar_panel": "Solar Panel",
+  "block.sunworks.reflection_panel": "Reflection Panel",
   "block.sunworks.dead_chorus_plant": "Dead Chorus Plant",
+
+  "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",
 
   "block.sunworks.energy_pipe_basic": "Basic Energy Pipe",
   "block.sunworks.energy_pipe_standard": "Standard Energy Pipe",

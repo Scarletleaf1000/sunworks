@@ -6,6 +6,7 @@ import me.scarletleaf1000.sunworks.block.custom.cable.CableTier;
 import me.scarletleaf1000.sunworks.block.custom.cable.EnergyPipeBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
+import me.scarletleaf1000.sunworks.block.custom.generator.ReflectionPanelBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.item.custom.DescriptiveBlockItem;
@@ -110,6 +111,16 @@ public class ModBlocks {
             block -> new DescriptiveBlockItem(block, new Item.Properties(),
                     Component.translatable("tooltip.sunworks.solar_panel.power_generation"),
                     Component.translatable("tooltip.sunworks.solar_panel.energy_storage")));
+
+    public static final DeferredBlock<Block> REFLECTION_PANEL = registerBlock("reflection_panel",
+            () -> new ReflectionPanelBlock(BlockBehaviour.Properties.of()
+                    .strength(3f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            ),
+            block -> new DescriptiveBlockItem(block, new Item.Properties(),
+                    Component.translatable("tooltip.sunworks.reflection_panel.description")));
 
     public static final Map<CableTier, DeferredBlock<EnergyPipeBlock>> ENERGY_PIPES = new EnumMap<>(CableTier.class);
 

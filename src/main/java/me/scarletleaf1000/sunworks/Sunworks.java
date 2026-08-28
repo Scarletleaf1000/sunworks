@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks;
 import com.mojang.logging.LogUtils;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.client.renderer.blockentity.ReflectionPanelRenderer;
 import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
@@ -13,7 +14,9 @@ import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -26,6 +29,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.common.NeoForge;
@@ -107,8 +111,15 @@ public class Sunworks {
         }
 
         @SubscribeEvent
+        public static void registerAdditionalModels(ModelEvent.RegisterAdditional event) {
+            event.register(ModelResourceLocation.standalone(
+                    ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID, "block/reflection_panel_panel")));
+        }
+
+        @SubscribeEvent
         public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntityTypes.CORRUPTED_PEARL.get(), ThrownItemRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntities.REFLECTION_PANEL_BE.get(), ReflectionPanelRenderer::new);
         }
     }
 }

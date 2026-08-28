@@ -76,6 +76,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                         .scale(0.4f, 0.4f, 0.4f)
                         .end()
                     .end();
+        withExistingParent(ModBlocks.REFLECTION_PANEL.getId().getPath(), modLoc("block/reflection_panel_base"));
     }
 
     private void clusterItem(DeferredBlock<? extends Block> block) {

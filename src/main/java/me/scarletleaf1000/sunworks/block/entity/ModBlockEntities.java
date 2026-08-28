@@ -4,6 +4,7 @@ import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
 import me.scarletleaf1000.sunworks.block.entity.custom.cable.EnergyPipeBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.generator.ReflectionPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.SolarAlloySmelterBlockEntity;
@@ -29,6 +30,10 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<SolarPanelBlockEntity>> SOLAR_PANEL_BE =
             BLOCK_ENTITIES.register("solar_panel_be", () -> BlockEntityType.Builder.of(
                     SolarPanelBlockEntity::new, ModBlocks.SOLAR_PANEL.get()).build(null));
+
+    public static final Supplier<BlockEntityType<ReflectionPanelBlockEntity>> REFLECTION_PANEL_BE =
+            BLOCK_ENTITIES.register("reflection_panel_be", () -> BlockEntityType.Builder.of(
+                    ReflectionPanelBlockEntity::new, ModBlocks.REFLECTION_PANEL.get()).build(null));
 
     public static final Supplier<BlockEntityType<EnergyPipeBlockEntity>> ENERGY_PIPE_BE =
             BLOCK_ENTITIES.register("energy_pipe_be", () -> BlockEntityType.Builder.of(
