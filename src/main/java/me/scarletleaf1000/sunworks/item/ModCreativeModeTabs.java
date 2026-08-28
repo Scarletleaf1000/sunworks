@@ -72,6 +72,10 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.HELIORECEIVER);
                        output.accept(ModBlocks.DEAD_CHORUS_PLANT);
 
+                       output.accept(ModBlocks.SIMPLE_MACHINE_CASING);
+                       output.accept(ModBlocks.ADVANCED_MACHINE_CASING);
+                       output.accept(ModBlocks.ULTIMATE_MACHINE_CASING);
+
                        ModBlocks.ENERGY_PIPES.values().forEach(output::accept);
                     }).build());
 
