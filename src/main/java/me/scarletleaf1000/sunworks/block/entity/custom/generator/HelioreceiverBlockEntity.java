@@ -42,7 +42,7 @@ import java.util.Set;
 public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine {
     private static final Set<IOType> SUPPORTED_TYPES = Set.of(IOType.ENERGY_OUTPUT);
     private static final int MAX_STORAGE = 65536;
-    private static final int MAX_TRANSFER = 1000;
+    private static final int MAX_TRANSFER = 16384;
     private static final int SCAN_INTERVAL = 40;
     private static final int MAX_DISTANCE = 6;
     private static final double MIN_COS = Math.cos(Math.toRadians(80));
