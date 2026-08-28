@@ -21,7 +21,7 @@ import org.joml.Vector3f;
 public class SolarWrenchItem extends Item {
     private static final String TAG_SELECTED = "selected_panel";
     private static final DustParticleOptions ORANGE_DUST = new DustParticleOptions(new Vector3f(1.0f, 0.5f, 0.0f), 1.0f);
-    private static final int MAX_LINK_DISTANCE = 9;
+    private static final int MAX_LINK_DISTANCE = 6;
     private static final double MIN_COS = Math.cos(Math.toRadians(80));
 
     public SolarWrenchItem(Properties properties) {
