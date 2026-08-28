@@ -44,12 +44,11 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     private static final int MAX_STORAGE = 65536;
     private static final int MAX_TRANSFER = 1000;
     private static final int SCAN_INTERVAL = 40;
-    private static final int MAX_DISTANCE = 9;
+    private static final int MAX_DISTANCE = 6;
     private static final double MIN_COS = Math.cos(Math.toRadians(80));
 
     private final SideConfiguration sideConfiguration = new SideConfiguration();
     private final List<BlockPos> connectedPanels = new ArrayList<>();
-    private boolean ejectEnabled = false;
     private int scanCooldown = 0;
 
     public HelioreceiverBlockEntity(BlockPos pos, BlockState state) {
@@ -138,25 +137,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
         return true;
     }
 
-    @Override
-    public boolean supportsEject() {
-        return true;
-    }
-
-    @Override
-    public boolean isEjectEnabled() {
-        return ejectEnabled;
-    }
-
-    @Override
-    public void setEjectEnabled(boolean enabled) {
-        this.ejectEnabled = enabled;
-        setChanged();
-        if (level != null) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-        }
-    }
-
     public void tick(Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide) return;
 
@@ -181,8 +161,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void ejectEnergy(Level level, BlockPos pos) {
-        if (!ejectEnabled) return;
-
         for (RelativeSide side : RelativeSide.values()) {
             if (sideConfiguration.get(side) != IOType.ENERGY_OUTPUT) continue;
 
@@ -237,7 +215,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("helioreceiver.energy", ENERGY_STORAGE.getEnergyStored());
-        tag.putBoolean("helioreceiver.eject_enabled", ejectEnabled);
         CompoundTag sideConfigTag = new CompoundTag();
         sideConfiguration.save(sideConfigTag);
         tag.put("side_config", sideConfigTag);
@@ -247,7 +224,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         ENERGY_STORAGE.setEnergy(tag.getInt("helioreceiver.energy"));
-        ejectEnabled = tag.getBoolean("helioreceiver.eject_enabled");
         if (tag.contains("side_config")) {
             sideConfiguration.load(tag.getCompound("side_config"));
         }

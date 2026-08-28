@@ -35,7 +35,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     private static final Set<IOType> SUPPORTED_TYPES = Set.of(IOType.ENERGY_OUTPUT);
 
     private final SideConfiguration sideConfiguration = new SideConfiguration();
-    private boolean ejectEnabled = false;
 
     public SolarPanelBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_BE.get(), pos, blockState);
@@ -111,25 +110,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
         return side == RelativeSide.DOWN;
     }
 
-    @Override
-    public boolean supportsEject() {
-        return true;
-    }
-
-    @Override
-    public boolean isEjectEnabled() {
-        return ejectEnabled;
-    }
-
-    @Override
-    public void setEjectEnabled(boolean enabled) {
-        this.ejectEnabled = enabled;
-        setChanged();
-        if (level != null) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-        }
-    }
-
     public void tick(Level level, BlockPos pos, BlockState state) {
         generatePower(getSunlightPower(level, pos));
         ejectEnergy(level, pos);
@@ -140,14 +120,10 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     /**
-     * While eject mode is on, actively pushes stored power out through every side configured as
-     * {@link IOType#ENERGY_OUTPUT} - but skips any neighbor that is itself a pipe, since pipes
-     * already pull from us on their own per-tick network sweep; pushing into one here too would
-     * double up on that same segment's tier budget for the same tick.
+     * Actively pushes stored power out through every side configured as {@link IOType#ENERGY_OUTPUT},
+     * skipping pipe neighbors since pipes pull from us on their own network sweep.
      */
     private void ejectEnergy(Level level, BlockPos pos) {
-        if (!ejectEnabled) return;
-
         for (RelativeSide side : RelativeSide.values()) {
             if (sideConfiguration.get(side) != IOType.ENERGY_OUTPUT) continue;
 
@@ -189,7 +165,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putInt("solar_panel.energy", ENERGY_STORAGE.getEnergyStored());
-        tag.putBoolean("solar_panel.eject_enabled", ejectEnabled);
 
         CompoundTag sideConfigTag = new CompoundTag();
         sideConfiguration.save(sideConfigTag);
@@ -202,7 +177,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         ENERGY_STORAGE.setEnergy(tag.getInt("solar_panel.energy"));
-        ejectEnabled = tag.getBoolean("solar_panel.eject_enabled");
 
         if (tag.contains("side_config")) {
             sideConfiguration.load(tag.getCompound("side_config"));
