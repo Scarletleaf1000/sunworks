@@ -1,8 +1,7 @@
-package me.scarletleaf1000.sunworks.compat;
+package me.scarletleaf1000.sunworks.compat.jei;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
-import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.recipe.custom.AlloySmelterRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

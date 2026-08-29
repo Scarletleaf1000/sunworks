@@ -1,4 +1,4 @@
-package me.scarletleaf1000.sunworks.compat;
+package me.scarletleaf1000.sunworks.compat.jei;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;

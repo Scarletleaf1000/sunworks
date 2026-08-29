@@ -34,6 +34,7 @@ public class DataGenerator {
 
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new PonderLangProvider(packOutput, Sunworks.MOD_ID));
 
         generator.addProvider(event.includeServer(), new ModWorldgenProvider(packOutput, lookupProvider));
     }
