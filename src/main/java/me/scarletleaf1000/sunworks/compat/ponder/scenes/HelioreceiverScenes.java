@@ -33,5 +33,7 @@ public class HelioreceiverScenes extends PonderScene {
         showShiftClickWithItemAt(scene, util, recieverPos, ModItems.SOLAR_WRENCH.get().getDefaultInstance());
         scene.idle(20);
         narrateAbove(scene, util, "A solar wrench can be used to link a reflector to a receiver.", reflectorPos);
+        scene.idle(20);
+        narrateAbove(scene, util, "The helioreceiver generates 60 FE/t for every connected panel.", recieverPos);
     }
 }
