@@ -35,6 +35,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RAW_CINDERITE_BLOCK.get());
         dropSelf(ModBlocks.RAW_SILVER_BLOCK.get());
         dropSelf(ModBlocks.ELECTRUM_BLOCK.get());
+        dropSelf(ModBlocks.CINDERSTEEL_BLOCK.get());
+        dropSelf(ModBlocks.VOIDSTEEL_BLOCK.get());
         dropSelf(ModBlocks.SOLAR_ALLOY_SMELTER.get());
         dropSelf(ModBlocks.ALLOY_SMELTER.get());
         dropSelf(ModBlocks.SOLAR_PANEL.get());

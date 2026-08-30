@@ -64,6 +64,8 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.RAW_SILVER_BLOCK);
                        output.accept(ModBlocks.SILVER_BLOCK);
                        output.accept(ModBlocks.ELECTRUM_BLOCK);
+                       output.accept(ModBlocks.CINDERSTEEL_BLOCK);
+                       output.accept(ModBlocks.VOIDSTEEL_BLOCK);
 
                        output.accept(ModBlocks.SOLAR_ALLOY_SMELTER);
                        output.accept(ModBlocks.ALLOY_SMELTER);

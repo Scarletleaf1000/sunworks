@@ -33,6 +33,14 @@ public class ModItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTRUM_NUGGET = ITEMS.registerItem("electrum_nugget",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> CINDERSTEEL_INGOT = ITEMS.registerItem("cindersteel_ingot",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> CINDERSTEEL_NUGGET = ITEMS.registerItem("cindersteel_nugget",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> VOIDSTEEL_INGOT = ITEMS.registerItem("voidsteel_ingot",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> VOIDSTEEL_NUGGET = ITEMS.registerItem("voidsteel_nugget",
+            Item::new, new Item.Properties());
     public static final DeferredItem<Item> SILICON = ITEMS.registerItem("silicon",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> HEAT_CORE = ITEMS.registerItem("heat_core",

@@ -42,6 +42,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.RAW_CINDERITE_BLOCK);
         blockWithItem(ModBlocks.RAW_SILVER_BLOCK);
         blockWithItem(ModBlocks.ELECTRUM_BLOCK);
+        blockWithItem(ModBlocks.CINDERSTEEL_BLOCK);
+        blockWithItem(ModBlocks.VOIDSTEEL_BLOCK);
         blockWithItem(ModBlocks.SIMPLE_MACHINE_CASING);
         blockWithItem(ModBlocks.ADVANCED_MACHINE_CASING);
         blockWithItem(ModBlocks.ULTIMATE_MACHINE_CASING);

@@ -41,26 +41,38 @@ public class ModItemTagProvider extends ItemTagsProvider {
         this.tag(Tags.Items.INGOTS)
                 .addTag(INGOTS_CINDERITE)
                 .addTag(INGOTS_SILVER)
-                .addTag(INGOTS_ELECTRUM);
+                .addTag(INGOTS_ELECTRUM)
+                .addTag(INGOTS_CINDERSTEEL)
+                .addTag(INGOTS_VOIDSTEEL);
         this.tag(INGOTS_CINDERITE)
                 .add(ModItems.CINDERITE_INGOT.get());
         this.tag(INGOTS_SILVER)
                 .add(ModItems.SILVER_INGOT.get());
         this.tag(INGOTS_ELECTRUM)
                 .add(ModItems.ELECTRUM_INGOT.get());
+        this.tag(INGOTS_CINDERSTEEL)
+                .add(ModItems.CINDERSTEEL_INGOT.get());
+        this.tag(INGOTS_VOIDSTEEL)
+                .add(ModItems.VOIDSTEEL_INGOT.get());
         this.tag(SILICON)
                 .add(ModItems.SILICON.get());
 
         this.tag(Tags.Items.NUGGETS)
                 .addTag(NUGGETS_CINDERITE)
                 .addTag(NUGGETS_SILVER)
-                .addTag(NUGGETS_ELECTRUM);
+                .addTag(NUGGETS_ELECTRUM)
+                .addTag(NUGGETS_CINDERSTEEL)
+                .addTag(NUGGETS_VOIDSTEEL);
         this.tag(NUGGETS_CINDERITE)
                 .add(ModItems.CINDERITE_NUGGET.get());
         this.tag(NUGGETS_SILVER)
                 .add(ModItems.SILVER_NUGGET.get());
         this.tag(NUGGETS_ELECTRUM)
                 .add(ModItems.ELECTRUM_NUGGET.get());
+        this.tag(NUGGETS_CINDERSTEEL)
+                .add(ModItems.CINDERSTEEL_NUGGET.get());
+        this.tag(NUGGETS_VOIDSTEEL)
+                .add(ModItems.VOIDSTEEL_NUGGET.get());
 
         this.tag(Tags.Items.RAW_MATERIALS)
                 .addTag(RAW_MATERIALS_CINDERITE)
@@ -91,7 +103,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .addTag(STORAGE_BLOCKS_SILVER)
                 .addTag(STORAGE_BLOCKS_RAW_CINDERITE)
                 .addTag(STORAGE_BLOCKS_RAW_SILVER)
-                .addTag(STORAGE_BLOCKS_ELECTRUM);
+                .addTag(STORAGE_BLOCKS_ELECTRUM)
+                .addTag(STORAGE_BLOCKS_CINDERSTEEL)
+                .addTag(STORAGE_BLOCKS_VOIDSTEEL);
         this.tag(STORAGE_BLOCKS_CINDERITE)
                 .add(ModBlocks.CINDERITE_BLOCK.get().asItem());
         this.tag(STORAGE_BLOCKS_SILVER)
@@ -102,6 +116,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ModBlocks.RAW_SILVER_BLOCK.get().asItem());
         this.tag(STORAGE_BLOCKS_ELECTRUM)
                 .add(ModBlocks.ELECTRUM_BLOCK.get().asItem());
+        this.tag(STORAGE_BLOCKS_CINDERSTEEL)
+                .add(ModBlocks.CINDERSTEEL_BLOCK.get().asItem());
+        this.tag(STORAGE_BLOCKS_VOIDSTEEL)
+                .add(ModBlocks.VOIDSTEEL_BLOCK.get().asItem());
     }
 
     public static final TagKey<Item> SILICON = commonTag("silicon");
@@ -112,4 +130,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
     public static final TagKey<Item> STORAGE_BLOCKS_RAW_CINDERITE = commonTag("storage_blocks/raw_cinderite");
     public static final TagKey<Item> STORAGE_BLOCKS_RAW_SILVER = commonTag("storage_blocks/raw_silver");
     public static final TagKey<Item> STORAGE_BLOCKS_ELECTRUM = commonTag("storage_blocks/electrum");
+    public static final TagKey<Item> INGOTS_CINDERSTEEL = commonTag("ingots/cindersteel");
+    public static final TagKey<Item> INGOTS_VOIDSTEEL = commonTag("ingots/voidsteel");
+    public static final TagKey<Item> NUGGETS_CINDERSTEEL = commonTag("nuggets/cindersteel");
+    public static final TagKey<Item> NUGGETS_VOIDSTEEL = commonTag("nuggets/voidsteel");
+    public static final TagKey<Item> STORAGE_BLOCKS_CINDERSTEEL = commonTag("storage_blocks/cindersteel");
+    public static final TagKey<Item> STORAGE_BLOCKS_VOIDSTEEL = commonTag("storage_blocks/voidsteel");
 }

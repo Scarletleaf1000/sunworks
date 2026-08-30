@@ -36,6 +36,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SILVER_BLOCK.get())
                 .add(ModBlocks.RAW_CINDERITE_BLOCK.get())
                 .add(ModBlocks.RAW_SILVER_BLOCK.get())
+                .add(ModBlocks.CINDERSTEEL_BLOCK.get())
+                .add(ModBlocks.VOIDSTEEL_BLOCK.get())
         ;
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -53,6 +55,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SILVER_BLOCK.get())
                 .add(ModBlocks.RAW_CINDERITE_BLOCK.get())
                 .add(ModBlocks.RAW_SILVER_BLOCK.get())
+                .add(ModBlocks.CINDERSTEEL_BLOCK.get())
+                .add(ModBlocks.VOIDSTEEL_BLOCK.get())
                 .add(ModBlocks.ELECTRUM_BLOCK.get())
                 .add(ModBlocks.SOLAR_ALLOY_SMELTER.get())
                 .add(ModBlocks.ALLOY_SMELTER.get())
@@ -98,6 +102,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .addTag(STORAGE_BLOCKS_RAW_CINDERITE)
                 .addTag(STORAGE_BLOCKS_RAW_SILVER)
                 .addTag(STORAGE_BLOCKS_ELECTRUM)
+                .addTag(STORAGE_BLOCKS_CINDERSTEEL)
+                .addTag(STORAGE_BLOCKS_VOIDSTEEL)
         ;
         this.tag(STORAGE_BLOCKS_CINDERITE)
                 .add(ModBlocks.CINDERITE_BLOCK.get());
@@ -109,6 +115,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_SILVER_BLOCK.get());
         this.tag(STORAGE_BLOCKS_ELECTRUM)
                 .add(ModBlocks.ELECTRUM_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_CINDERSTEEL)
+                .add(ModBlocks.CINDERSTEEL_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_VOIDSTEEL)
+                .add(ModBlocks.VOIDSTEEL_BLOCK.get());
         this.tag(MACHINE_CASING)
                 .add(ModBlocks.SIMPLE_MACHINE_CASING.get())
                 .add(ModBlocks.ADVANCED_MACHINE_CASING.get())
@@ -123,6 +133,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     public static final TagKey<Block> STORAGE_BLOCKS_RAW_CINDERITE = commonTag("storage_blocks/raw_cinderite");
     public static final TagKey<Block> STORAGE_BLOCKS_RAW_SILVER = commonTag("storage_blocks/raw_silver");
     public static final TagKey<Block> STORAGE_BLOCKS_ELECTRUM = commonTag("storage_blocks/electrum");
+    public static final TagKey<Block> STORAGE_BLOCKS_CINDERSTEEL = commonTag("storage_blocks/cindersteel");
+    public static final TagKey<Block> STORAGE_BLOCKS_VOIDSTEEL = commonTag("storage_blocks/voidsteel");
     public static final TagKey<Block> MACHINE_CASING = modTag("machine_casing");
 
     private static TagKey<Block> modTag(String path) {

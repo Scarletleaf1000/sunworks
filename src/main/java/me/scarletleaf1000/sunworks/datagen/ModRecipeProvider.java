@@ -33,6 +33,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 RecipeCategory.MISC, ModItems.SILVER_INGOT.get());
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.ELECTRUM_NUGGET.get(),
                 RecipeCategory.MISC, ModItems.ELECTRUM_INGOT.get());
+        nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.CINDERSTEEL_NUGGET.get(),
+                RecipeCategory.MISC, ModItems.CINDERSTEEL_INGOT.get());
+        nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.VOIDSTEEL_NUGGET.get(),
+                RecipeCategory.MISC, ModItems.VOIDSTEEL_INGOT.get());
 
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, ModItems.CINDERITE_INGOT.get(),
                 RecipeCategory.BUILDING_BLOCKS, ModBlocks.CINDERITE_BLOCK.get(), "cinderite_ingot_from_cinderite_block", "cinderite_ingot");
@@ -40,6 +44,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILVER_BLOCK.get(), "silver_ingot_from_silver_block", "silver_ingot");
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, ModItems.ELECTRUM_INGOT.get(),
                 RecipeCategory.BUILDING_BLOCKS, ModBlocks.ELECTRUM_BLOCK.get(), "electrum_ingot_from_electrum_block", "electrum_ingot");
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, ModItems.CINDERSTEEL_INGOT.get(),
+                RecipeCategory.BUILDING_BLOCKS, ModBlocks.CINDERSTEEL_BLOCK.get(), "cindersteel_ingot_from_cindersteel_block", "cindersteel_ingot");
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, ModItems.VOIDSTEEL_INGOT.get(),
+                RecipeCategory.BUILDING_BLOCKS, ModBlocks.VOIDSTEEL_BLOCK.get(), "voidsteel_ingot_from_voidsteel_block", "voidsteel_ingot");
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.RAW_CINDERITE.get(),
                 RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_CINDERITE_BLOCK.get());
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.RAW_SILVER.get(),
@@ -56,6 +64,19 @@ public class ModRecipeProvider extends RecipeProvider {
         AlloySmelterRecipeBuilder.alloySmelting(RecipeCategory.MISC, new ItemStack(ModItems.SILICON.get(), 1), 300)
                 .requires(Items.QUARTZ, 2)
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
+                .save(recipeOutput);
+
+        AlloySmelterRecipeBuilder.alloySmelting(RecipeCategory.MISC, new ItemStack(ModItems.CINDERSTEEL_INGOT.get(), 4), 300)
+                .requires(ModItems.CINDERITE_INGOT.get(), 1)
+                .requires(Items.IRON_INGOT, 4)
+                .requires(Items.COAL,  2)
+                .unlockedBy("has_cinderite", has(ModItems.CINDERITE_INGOT))
+                .save(recipeOutput);
+
+        AlloySmelterRecipeBuilder.alloySmelting(RecipeCategory.MISC, new ItemStack(ModItems.VOIDSTEEL_INGOT.get(), 3), 300)
+                .requires(ModItems.CINDERSTEEL_INGOT.get(), 3)
+                .requires(ModItems.CORRUPTED_PEARL)
+                .unlockedBy("has_corrupted_pearl", has(ModItems.CORRUPTED_PEARL))
                 .save(recipeOutput);
 
         List<ItemLike> cinderiteSmeltables = List.of(

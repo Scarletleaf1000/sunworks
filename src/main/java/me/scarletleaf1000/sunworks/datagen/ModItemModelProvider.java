@@ -27,6 +27,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.SILVER_NUGGET.get());
         basicItem(ModItems.ELECTRUM_INGOT.get());
         basicItem(ModItems.ELECTRUM_NUGGET.get());
+        basicItem(ModItems.CINDERSTEEL_INGOT.get());
+        basicItem(ModItems.CINDERSTEEL_NUGGET.get());
+        basicItem(ModItems.VOIDSTEEL_INGOT.get());
+        basicItem(ModItems.VOIDSTEEL_NUGGET.get());
         basicItem(ModItems.SILICON.get());
         basicItem(ModItems.HEAT_CORE.get());
         basicItem(ModItems.SOLAR_PANEL_COMPONENT.get());
