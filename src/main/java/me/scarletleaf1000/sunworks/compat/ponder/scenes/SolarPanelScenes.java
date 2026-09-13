@@ -1,6 +1,5 @@
 package me.scarletleaf1000.sunworks.compat.ponder.scenes;
 
-import javafx.scene.Scene;
 import me.scarletleaf1000.sunworks.compat.ponder.util.PonderScene;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
@@ -29,14 +28,10 @@ public class SolarPanelScenes extends PonderScene {
 
         var panelPos = util.grid().at(3, 2, 1);
         var panelSelection = util.select().position(panelPos);
-        var cablePos1 = util.grid().at(3, 1, 1);
-        var cablePos2 = util.grid().at(3, 1, 4);
-        var cableSelection = util.select().fromTo(cablePos1, cablePos2);
 
         reveal(scene, panelSelection, Direction.UP);
         narrateAbove(scene, util, "You will need to extract power from the solar panel.", panelPos);
-        reveal(scene, cableSelection, Direction.SOUTH);
-        narrateAbove(scene, util, "Solar panels can only output power on the bottom.", cablePos1);
+        narrateAbove(scene, util, "Solar panels can only output power on the bottom.", panelPos);
     }
 
 }

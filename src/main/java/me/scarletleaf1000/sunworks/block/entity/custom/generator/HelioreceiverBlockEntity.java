@@ -1,7 +1,6 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
 import me.scarletleaf1000.sunworks.block.ModBlocks;
-import me.scarletleaf1000.sunworks.block.custom.cable.AbstractPipeBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
@@ -166,8 +165,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
 
             Direction absolute = side.toAbsolute(getFacing());
             BlockPos neighborPos = pos.relative(absolute);
-            if (level.getBlockState(neighborPos).getBlock() instanceof AbstractPipeBlock) continue;
-
             ModEnergyUtil.move(pos, neighborPos, MAX_TRANSFER, level);
         }
     }

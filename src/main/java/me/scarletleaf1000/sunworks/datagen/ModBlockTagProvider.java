@@ -2,7 +2,6 @@ package me.scarletleaf1000.sunworks.datagen;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
-import me.scarletleaf1000.sunworks.block.custom.cable.CableTier;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -84,11 +83,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.DEEPSLATE_SILVER_ORE.get())
                 .add(ModBlocks.ELECTRUM_BLOCK.get())
         ;
-
-        for (CableTier tier : CableTier.values()) {
-            this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    .add(ModBlocks.ENERGY_PIPES.get(tier).get());
-        }
 
         this.tag(Tags.Blocks.ORES)
                 .addTag(ORES_CINDERITE)

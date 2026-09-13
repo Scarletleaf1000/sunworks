@@ -3,7 +3,6 @@ package me.scarletleaf1000.sunworks.block.entity;
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
-import me.scarletleaf1000.sunworks.block.entity.custom.cable.EnergyPipeBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.HelioreceiverBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.ReflectionPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
@@ -11,7 +10,6 @@ import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlo
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.SolarAlloySmelterBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.CoronaTapInterfaceBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -44,13 +42,6 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<CoronaTapInterfaceBlockEntity>> CORONA_TAP_INTERFACE_BE =
             BLOCK_ENTITIES.register("corona_tap_interface_be", () -> BlockEntityType.Builder.of(
                     CoronaTapInterfaceBlockEntity::new, ModBlocks.CORONA_TAP_INTERFACE.get()).build(null));
-
-    public static final Supplier<BlockEntityType<EnergyPipeBlockEntity>> ENERGY_PIPE_BE =
-            BLOCK_ENTITIES.register("energy_pipe_be", () -> BlockEntityType.Builder.of(
-                    EnergyPipeBlockEntity::new,
-                    ModBlocks.ENERGY_PIPES.values().stream()
-                            .map(deferredBlock -> (Block) deferredBlock.get())
-                            .toArray(Block[]::new)).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

@@ -2,7 +2,6 @@ package me.scarletleaf1000.sunworks.event;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
-import me.scarletleaf1000.sunworks.block.entity.custom.cable.EnergyPipeBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.HelioreceiverBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
@@ -24,8 +23,6 @@ public class ModBusEvents {
                 ModBlockEntities.SOLAR_PANEL_BE.get(), SolarPanelBlockEntity::getEnergyStorage);
         e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
                 ModBlockEntities.HELIORECEIVER_BE.get(), HelioreceiverBlockEntity::getEnergyStorage);
-        e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
-                ModBlockEntities.ENERGY_PIPE_BE.get(), EnergyPipeBlockEntity::getEnergyStorage);
         e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
                 ModBlockEntities.ALLOY_SMELTER_BE.get(), AlloySmelterBlockEntity::getEnergyStorage);
     }

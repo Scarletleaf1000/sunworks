@@ -17,8 +17,7 @@ public class HelioreceiverScenes extends PonderScene {
         scene.idle(10);
 
         var recieverPos = util.grid().at(3, 0, 3);
-        var cablePos = util.grid().at(3, 2,3);
-        var recieverSelection = util.select().fromTo(cablePos, recieverPos);
+        var recieverSelection = util.select().position(recieverPos);
         var reflectorPos = util.grid().at(1, 1, 1);
         var reflectorSelection = util.select().position(reflectorPos);
 

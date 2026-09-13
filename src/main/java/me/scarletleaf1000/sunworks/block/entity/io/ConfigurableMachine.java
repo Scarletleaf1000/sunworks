@@ -5,8 +5,8 @@ import net.minecraft.core.Direction;
 import java.util.Set;
 
 /**
- * Implemented by any block entity - a machine today, and eventually an item/fluid pipe - that
- * exposes a per-side {@link IOType} configuration through the configuration tab GUI widget.
+ * Implemented by any block entity that exposes a per-side {@link IOType} configuration
+ * through the configuration tab GUI widget.
  */
 public interface ConfigurableMachine {
     SideConfiguration getSideConfiguration();
@@ -46,10 +46,7 @@ public interface ConfigurableMachine {
 
     /**
      * @return whether eject mode is currently on. While on, the machine actively pushes its
-     * output resource out through every side configured as an output - but only into neighbors
-     * that are <b>not</b> pipes, since pipes already pull from connected machines themselves via
-     * their own network sweep (see {@code EnergyPipeBlockEntity}); pushing into a pipe as well
-     * would double up on that same per-tick budget.
+     * output resource out through every side configured as an output.
      */
     default boolean isEjectEnabled() {
         return false;

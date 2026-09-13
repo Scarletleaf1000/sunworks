@@ -1,6 +1,5 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
-import me.scarletleaf1000.sunworks.block.custom.cable.AbstractPipeBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
@@ -120,8 +119,7 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     /**
-     * Actively pushes stored power out through every side configured as {@link IOType#ENERGY_OUTPUT},
-     * skipping pipe neighbors since pipes pull from us on their own network sweep.
+     * Actively pushes stored power out through every side configured as {@link IOType#ENERGY_OUTPUT}.
      */
     private void ejectEnergy(Level level, BlockPos pos) {
         for (RelativeSide side : RelativeSide.values()) {
@@ -129,8 +127,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
 
             Direction absolute = side.toAbsolute(getFacing());
             BlockPos neighborPos = pos.relative(absolute);
-            if (level.getBlockState(neighborPos).getBlock() instanceof AbstractPipeBlock) continue;
-
             ModEnergyUtil.move(pos, neighborPos, MAX_TRANSFER, level);
         }
     }

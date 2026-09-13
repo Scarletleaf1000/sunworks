@@ -1,7 +1,6 @@
 package me.scarletleaf1000.sunworks.datagen;
 
 import me.scarletleaf1000.sunworks.block.ModBlocks;
-import me.scarletleaf1000.sunworks.block.custom.cable.CableTier;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -52,10 +51,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.CORONA_TAP_INTERFACE.get());
 
         dropOther(ModBlocks.DEAD_CHORUS_PLANT.get(), ModItems.CHORUS_HUSK.get());
-
-        for (CableTier tier : CableTier.values()) {
-            dropSelf(ModBlocks.ENERGY_PIPES.get(tier).get());
-        }
 
         add(ModBlocks.CINDERITE_ORE.get(), block -> createOreDrop(block, ModItems.RAW_CINDERITE.get()));
         add(ModBlocks.DEEPSLATE_CINDERITE_ORE.get(), block -> createOreDrop(block, ModItems.RAW_CINDERITE.get()));
