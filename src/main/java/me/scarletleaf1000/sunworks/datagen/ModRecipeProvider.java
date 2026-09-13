@@ -143,9 +143,9 @@ public class ModRecipeProvider extends RecipeProvider {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REFLECTION_PANEL.get())
                 .pattern("sss")
-                .pattern("sSs")
+                .pattern(" S ")
                 .pattern("SIS")
-                .define('s', ModItems.SILICON.get())
+                .define('s', ModItems.SILVER_INGOT.get())
                 .define('S', ModItems.SILICON.get())
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_solar_panel_component", has(ModItems.SOLAR_PANEL_COMPONENT.get()))

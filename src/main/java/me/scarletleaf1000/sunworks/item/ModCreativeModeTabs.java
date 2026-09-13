@@ -33,6 +33,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RAW_SILVER);
                         output.accept(ModItems.ELECTRUM_INGOT);
                         output.accept(ModItems.ELECTRUM_NUGGET);
+                        output.accept(ModItems.CINDERSTEEL_INGOT);
+                        output.accept(ModItems.CINDERSTEEL_NUGGET);
+                        output.accept(ModItems.VOIDSTEEL_INGOT);
+                        output.accept(ModItems.VOIDSTEEL_NUGGET);
                         output.accept(ModItems.SILICON);
                         output.accept(ModItems.HEAT_CORE);
                         output.accept(ModItems.SOLAR_PANEL_COMPONENT);
@@ -77,6 +81,11 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.SIMPLE_MACHINE_CASING);
                        output.accept(ModBlocks.ADVANCED_MACHINE_CASING);
                        output.accept(ModBlocks.ULTIMATE_MACHINE_CASING);
+                       output.accept(ModBlocks.STEADY_ANCHOR);
+                       output.accept(ModBlocks.VOLATILE_ANCHOR);
+                       output.accept(ModBlocks.ANCHOR_CASING);
+                       output.accept(ModBlocks.CORONA_TAP);
+                       output.accept(ModBlocks.CORONA_TAP_INTERFACE);
 
                        ModBlocks.ENERGY_PIPES.values().forEach(output::accept);
                     }).build());

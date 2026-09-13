@@ -9,6 +9,7 @@ import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock
 import me.scarletleaf1000.sunworks.block.custom.generator.HelioreceiverBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.ReflectionPanelBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
+import me.scarletleaf1000.sunworks.block.custom.CoronaTapInterfaceBlock;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.item.custom.DescriptiveBlockItem;
 import net.minecraft.network.chat.Component;
@@ -72,6 +73,31 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> ULTIMATE_MACHINE_CASING = registerBlock("ultimate_machine_casing",
             () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> STEADY_ANCHOR = registerBlock("steady_anchor",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> VOLATILE_ANCHOR = registerBlock("volatile_anchor",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> ANCHOR_CASING = registerBlock("anchor_casing",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> CORONA_TAP = registerBlock("corona_tap",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(5f, 6f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<CoronaTapInterfaceBlock> CORONA_TAP_INTERFACE = registerBlock("corona_tap_interface",
+            () -> new CoronaTapInterfaceBlock(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));

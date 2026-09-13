@@ -9,6 +9,7 @@ import me.scarletleaf1000.sunworks.block.entity.custom.generator.ReflectionPanel
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.SolarAlloySmelterBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.CoronaTapInterfaceBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,6 +40,10 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<HelioreceiverBlockEntity>> HELIORECEIVER_BE =
             BLOCK_ENTITIES.register("helioreceiver_be", () -> BlockEntityType.Builder.of(
                     HelioreceiverBlockEntity::new, ModBlocks.HELIORECEIVER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<CoronaTapInterfaceBlockEntity>> CORONA_TAP_INTERFACE_BE =
+            BLOCK_ENTITIES.register("corona_tap_interface_be", () -> BlockEntityType.Builder.of(
+                    CoronaTapInterfaceBlockEntity::new, ModBlocks.CORONA_TAP_INTERFACE.get()).build(null));
 
     public static final Supplier<BlockEntityType<EnergyPipeBlockEntity>> ENERGY_PIPE_BE =
             BLOCK_ENTITIES.register("energy_pipe_be", () -> BlockEntityType.Builder.of(

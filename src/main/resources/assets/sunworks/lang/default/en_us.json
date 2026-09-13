@@ -45,6 +45,11 @@
   "block.sunworks.simple_machine_casing": "Simple Machine Casing",
   "block.sunworks.advanced_machine_casing": "Advanced Machine Casing",
   "block.sunworks.ultimate_machine_casing": "Ultimate Machine Casing",
+  "block.sunworks.steady_anchor": "Steady Anchor",
+  "block.sunworks.volatile_anchor": "Volatile Anchor",
+  "block.sunworks.anchor_casing": "Anchor Casing",
+  "block.sunworks.corona_tap": "Corona Tap",
+  "block.sunworks.corona_tap_interface": "Corona Tap Interface",
 
   "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",
   "tooltip.sunworks.helioreceiver.description": "Generates power from linked reflection panels.",

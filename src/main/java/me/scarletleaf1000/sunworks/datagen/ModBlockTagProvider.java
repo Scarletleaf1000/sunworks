@@ -38,6 +38,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_SILVER_BLOCK.get())
                 .add(ModBlocks.CINDERSTEEL_BLOCK.get())
                 .add(ModBlocks.VOIDSTEEL_BLOCK.get())
+                .add(ModBlocks.STEADY_ANCHOR.get())
+                .add(ModBlocks.VOLATILE_ANCHOR.get())
+                .add(ModBlocks.ANCHOR_CASING.get())
+                .add(ModBlocks.CORONA_TAP.get())
+                .add(ModBlocks.CORONA_TAP_INTERFACE.get())
         ;
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -65,6 +70,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SIMPLE_MACHINE_CASING.get())
                 .add(ModBlocks.ADVANCED_MACHINE_CASING.get())
                 .add(ModBlocks.ULTIMATE_MACHINE_CASING.get())
+                .add(ModBlocks.STEADY_ANCHOR.get())
+                .add(ModBlocks.VOLATILE_ANCHOR.get())
+                .add(ModBlocks.ANCHOR_CASING.get())
+                .add(ModBlocks.CORONA_TAP.get())
+                .add(ModBlocks.CORONA_TAP_INTERFACE.get())
         ;
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
@@ -123,6 +133,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.SIMPLE_MACHINE_CASING.get())
                 .add(ModBlocks.ADVANCED_MACHINE_CASING.get())
                 .add(ModBlocks.ULTIMATE_MACHINE_CASING.get())
+                .add(ModBlocks.ANCHOR_CASING.get())
         ;
     }
 
