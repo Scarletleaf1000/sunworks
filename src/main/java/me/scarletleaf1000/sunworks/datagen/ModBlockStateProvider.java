@@ -40,11 +40,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SIMPLE_MACHINE_CASING);
         blockWithItem(ModBlocks.ADVANCED_MACHINE_CASING);
         blockWithItem(ModBlocks.ULTIMATE_MACHINE_CASING);
-        blockWithItem(ModBlocks.STEADY_ANCHOR);
-        blockWithItem(ModBlocks.VOLATILE_ANCHOR);
-        blockWithItem(ModBlocks.ANCHOR_CASING);
-        blockWithItem(ModBlocks.CORONA_TAP);
-        simpleBlockWithItem(ModBlocks.CORONA_TAP_INTERFACE.get(), cubeAll(ModBlocks.CORONA_TAP_INTERFACE.get()));
+        //blockWithItem(ModBlocks.STEADY_ANCHOR);
+        //blockWithItem(ModBlocks.VOLATILE_ANCHOR);
+        //blockWithItem(ModBlocks.ANCHOR_CASING);
+        //blockWithItem(ModBlocks.CORONA_TAP);
+        //simpleBlockWithItem(ModBlocks.CORONA_TAP_INTERFACE.get(), cubeAll(ModBlocks.CORONA_TAP_INTERFACE.get()));
 
         horizontalFaceBlock(ModBlocks.SOLAR_ALLOY_SMELTER, true, true);
         horizontalFaceBlock(ModBlocks.ALLOY_SMELTER, true, false);
