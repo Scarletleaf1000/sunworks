@@ -2,21 +2,19 @@ package me.scarletleaf1000.sunworks.block;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.custom.BuddingHelioliteBlock;
-import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
-import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
+import me.scarletleaf1000.sunworks.block.custom.CoronaTapInterfaceBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.HelioreceiverBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.ReflectionPanelBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
-import me.scarletleaf1000.sunworks.block.custom.CoronaTapInterfaceBlock;
+import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
+import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.item.custom.DescriptiveBlockItem;
+import me.scarletleaf1000.sunworks.multiblocks.ports.EnergyPortBlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.AmethystClusterBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChorusPlantBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -179,6 +177,9 @@ public class ModBlocks {
             ),
             block -> new DescriptiveBlockItem(block, new Item.Properties(),
                     Component.translatable("tooltip.sunworks.helioreceiver.description")));
+
+    public static final DeferredBlock<EnergyPortBlock> ENERGY_PORT = registerBlock("energy_port",
+            () -> new EnergyPortBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 100_000));
 
     private static DeferredBlock<Block> registerOre(String name, boolean deepslate) {
         return registerBlock(name, () -> new Block(BlockBehaviour.Properties.of()
