@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,11 +52,40 @@ public abstract class MultiblockTileController extends BlockEntity {
                 blockToPositionsCache.computeIfAbsent(block, k -> new HashSet<>()).add(pos));
     }
 
-    public Set<BlockPos> getPositionsForBlock(MBBuildingBlock targetBlock) {
+    public Set<BlockPos> getRelativePositionsForBlock(MBBuildingBlock targetBlock) {
         if (blockToPositionsCache == null) {
             cacheStructurePositions();
         }
         return blockToPositionsCache.getOrDefault(targetBlock, Collections.emptySet());
+    }
+
+    public <BE extends BlockEntity> Set<BE> getBlockEntities(MBBuildingBlock targetBlock, Class<BE> clazz) {
+        if (level == null) return Collections.emptySet();
+
+        Set<BE> found = new HashSet<>();
+        for (BlockPos pos : getRelativePositionsForBlock(targetBlock)) {
+            BlockEntity be = level.getBlockEntity(worldPosition.offset(pos));
+            if (clazz.isInstance(be))
+                found.add(clazz.cast(be));
+
+        }
+        return found;
+    }
+
+    public <B extends Block> List<BlockState> getBlockStates(MBBuildingBlock targetBlock, Class<B> clazz) {
+        if (level == null) return Collections.emptyList();
+
+        List<BlockState> found = new ArrayList<>();
+        for (BlockPos pos : getRelativePositionsForBlock(targetBlock)) {
+            BlockState state = level.getBlockState(worldPosition.offset(pos));
+            if (clazz.isInstance(state.getBlock()))
+                found.add(state);
+        }
+        return found;
+    }
+
+    public List<BlockState> getBlockStates(MBBuildingBlock targetBlock) {
+        return getBlockStates(targetBlock, Block.class);
     }
 
     public boolean isStructureValid() {
@@ -117,7 +147,7 @@ public abstract class MultiblockTileController extends BlockEntity {
     }
 
     public void tick() {
-        if (level == null || level.isClientSide()) return;
+        if (level == null) return;
 
         if (countdown > 0) {
             countdown--;

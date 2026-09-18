@@ -1,5 +1,6 @@
 package me.scarletleaf1000.sunworks.multiblocks;
 
+import me.scarletleaf1000.sunworks.block.ModBlocks;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -39,8 +40,17 @@ public class MBBuildingBlock implements Predicate<BlockState> {
         return predicate.test(state);
     }
 
-    public static final MBBuildingBlock ANY = new MBBuildingBlock(state -> true); // dont think this should be used
-    public static final MBBuildingBlock AIR = new MBBuildingBlock(BlockBehaviour.BlockStateBase::isAir);
+    public static final MBBuildingBlock ANY = new MBBuildingBlock(state -> true); // don't think this should be used but it's here anyway
+    public static final MBBuildingBlock AIR         = new MBBuildingBlock(BlockBehaviour.BlockStateBase::isAir);
+    public static final MBBuildingBlock ENERGY_PORT = new MBBuildingBlock(ModBlocks.ENERGY_PORT, ModBlocks.SIMPLE_MACHINE_CASING);
+    public static final MBBuildingBlock CORONA_TAP_MODIFIER_BLOCK = new MBBuildingBlock(
+            ModBlocks.MODIFIER_BLOCK1,
+            ModBlocks.MODIFIER_BLOCK2,
+            ModBlocks.MODIFIER_BLOCK3,
+            ModBlocks.MODIFIER_BLOCK4,
+            ModBlocks.SIMPLE_MACHINE_CASING
+    );
+    public static final MBBuildingBlock SIMPLE_CASING_BLOCK = new MBBuildingBlock(ModBlocks.SIMPLE_MACHINE_CASING);
 
 //    public static final MBBuildingBlock DIRTS = new MBBuildingBlock(
 //            () -> Blocks.DIRT,

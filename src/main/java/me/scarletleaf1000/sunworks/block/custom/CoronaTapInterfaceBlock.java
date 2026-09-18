@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated(forRemoval = true)
 public class CoronaTapInterfaceBlock extends BaseEntityBlock {
     public static final MapCodec<CoronaTapInterfaceBlock> CODEC = simpleCodec(CoronaTapInterfaceBlock::new);
 
@@ -23,7 +24,7 @@ public class CoronaTapInterfaceBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CoronaTapInterfaceBlockEntity(pos, state);
+        return new CoronaTapInterfaceBlockEntity(null, pos, state);
     }
 
     @Override

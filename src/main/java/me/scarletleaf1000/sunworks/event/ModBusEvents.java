@@ -4,9 +4,10 @@ import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.HelioreceiverBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.multiblock.CoronaTapBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.multiblock.EnergyPortBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.SolarAlloySmelterBlockEntity;
-import me.scarletleaf1000.sunworks.multiblocks.ports.EnergyPortBlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -29,5 +30,7 @@ public class ModBusEvents {
                 ModBlockEntities.ALLOY_SMELTER_BE.get(), AlloySmelterBlockEntity::getEnergyStorage);
         e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
                 ModBlockEntities.ENERGY_PORT_BE.get(), EnergyPortBlockEntity::getEnergyStorage);
+        e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
+                ModBlockEntities.CORONA_TAP_BE.get(), CoronaTapBlockEntity::getEnergyStorage);
     }
 }

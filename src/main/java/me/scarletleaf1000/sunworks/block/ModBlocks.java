@@ -2,15 +2,16 @@ package me.scarletleaf1000.sunworks.block;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.custom.BuddingHelioliteBlock;
-import me.scarletleaf1000.sunworks.block.custom.CoronaTapInterfaceBlock;
+import me.scarletleaf1000.sunworks.block.custom.ModifierBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.HelioreceiverBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.ReflectionPanelBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
+import me.scarletleaf1000.sunworks.block.custom.multiblock.CoronaTapBlock;
+import me.scarletleaf1000.sunworks.block.custom.multiblock.EnergyPortBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.item.custom.DescriptiveBlockItem;
-import me.scarletleaf1000.sunworks.multiblocks.ports.EnergyPortBlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -86,15 +87,15 @@ public class ModBlocks {
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> CORONA_TAP = registerBlock("corona_tap",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new CoronaTapBlock(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<CoronaTapInterfaceBlock> CORONA_TAP_INTERFACE = registerBlock("corona_tap_interface",
-            () -> new CoronaTapInterfaceBlock(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
+//    public static final DeferredBlock<CoronaTapInterfaceBlock> CORONA_TAP_INTERFACE = registerBlock("corona_tap_interface",
+//            () -> new CoronaTapInterfaceBlock(BlockBehaviour.Properties.of()
+//                    .strength(5f, 6f)
+//                    .sound(SoundType.METAL)
+//                    .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> CINDERITE_BLOCK = registerBlock("cinderite_block",
             () -> new Block(BlockBehaviour.Properties.of()
@@ -180,6 +181,16 @@ public class ModBlocks {
 
     public static final DeferredBlock<EnergyPortBlock> ENERGY_PORT = registerBlock("energy_port",
             () -> new EnergyPortBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 100_000));
+
+    //Corona Tap Modifier Blocks
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK1 = registerBlock("modifier1",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), -100,0,1,0.95f));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK2 = registerBlock("modifier2",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 100,0,1,1.1f));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK3 = registerBlock("modifier3",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 10,100_000,1,1));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK4 = registerBlock("modifier4",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 0,0,0.75f,0.7f));
 
     private static DeferredBlock<Block> registerOre(String name, boolean deepslate) {
         return registerBlock(name, () -> new Block(BlockBehaviour.Properties.of()

@@ -149,6 +149,7 @@ dependencies {
     // at runtime, use the full JEI jar for NeoForge
     runtimeOnly("mezz.jei:jei-${mc_version}-neoforge:${jei_version}")
 
+    runtimeOnly "maven.modrinth:nvQzSEkH:eYz2YBGT" //for testing
     runtimeOnly "maven.modrinth:Ce6I4WUE:5KzzycBT" //mekanism for testing purposes
     jarJar(implementation("net.createmod.ponder:ponder-neoforge")) {
         version {

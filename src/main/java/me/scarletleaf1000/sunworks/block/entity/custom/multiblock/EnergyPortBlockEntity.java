@@ -1,7 +1,10 @@
-package me.scarletleaf1000.sunworks.multiblocks.ports;
+package me.scarletleaf1000.sunworks.block.entity.custom.multiblock;
 
+import me.scarletleaf1000.sunworks.block.custom.multiblock.EnergyPortBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
+import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlock;
+import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,8 +19,8 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
     }
 
     public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-        if (getFacing() != direction) return null;
-        return mbCapability;
+        if (direction==null || getFacing() == direction) return mbCapability;
+        return null;
     }
 
     @Override
@@ -32,17 +35,21 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
 
     @Override
     public void addOwnersCapability(IEnergyStorage ownerCapability) {
-        this.mbCapability = new IOEnergyStorage(ownerCapability);
+        this.mbCapability = new PortEnergyStorage(ownerCapability);
+        setChanged();
+        if (this.level != null && !this.level.isClientSide()) {
+            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
+        }
     }
 
     protected int getIORate() {
         return ((EnergyPortBlock) getBlockState().getBlock()).ioRate;
     }
 
-    public class IOEnergyStorage implements IEnergyStorage {
+    public class PortEnergyStorage implements IEnergyStorage {
         private final @NotNull IEnergyStorage energyStorage;
 
-        public IOEnergyStorage(@NotNull IEnergyStorage mbEnergyStorage) {
+        public PortEnergyStorage(@NotNull IEnergyStorage mbEnergyStorage) {
             energyStorage = mbEnergyStorage;
         }
 

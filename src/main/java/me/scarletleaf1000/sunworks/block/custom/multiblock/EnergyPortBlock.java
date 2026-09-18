@@ -1,10 +1,13 @@
-package me.scarletleaf1000.sunworks.multiblocks.ports;
+package me.scarletleaf1000.sunworks.block.custom.multiblock;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class EnergyPortBlock extends CapabilityPortBlock {
 
@@ -28,4 +31,8 @@ public class EnergyPortBlock extends CapabilityPortBlock {
         ).apply(e, EnergyPortBlock::new));
     }
 
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
 }
