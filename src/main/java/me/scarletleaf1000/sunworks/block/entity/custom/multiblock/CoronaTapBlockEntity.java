@@ -15,6 +15,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,7 +102,7 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
                     if (!(x == 0 && y == 0 && z == 0))
                         structure.put(new BlockPos(x, y, z), MBBuildingBlock.AIR);
 
-        CoronaTapBlockEntity.structure = structure;
+        CoronaTapBlockEntity.structure = Collections.unmodifiableMap(structure);
         return structure;
     }
 
