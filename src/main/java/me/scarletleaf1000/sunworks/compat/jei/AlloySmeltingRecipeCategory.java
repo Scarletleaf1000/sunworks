@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class AlloySmeltingRecipeCategory implements IRecipeCategory {
+public class AlloySmeltingRecipeCategory implements IRecipeCategory<AlloySmelterRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID, "alloy_smelting");
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(
             Sunworks.MOD_ID, "textures/compat/jei/alloy_smelting.png");
@@ -36,7 +36,7 @@ public class AlloySmeltingRecipeCategory implements IRecipeCategory {
     }
 
     @Override
-    public RecipeType getRecipeType() {
+    public RecipeType<AlloySmelterRecipe> getRecipeType() {
         return AlloySmeltingRecipeCategory.ALLOY_SMELTING_RECIPE_TYPE;
     }
 
@@ -56,15 +56,14 @@ public class AlloySmeltingRecipeCategory implements IRecipeCategory {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, Object recipe, IFocusGroup focuses) {
-        AlloySmelterRecipe alloySmelterRecipe = (AlloySmelterRecipe) recipe;
+    public void setRecipe(IRecipeLayoutBuilder builder, AlloySmelterRecipe recipe, IFocusGroup focuses) {
         int[][] slotPositions = {{56, 24}, {79, 17}, {102, 24}};
-        List<SizedIngredient> inputs = alloySmelterRecipe.inputs();
+        List<SizedIngredient> inputs = recipe.inputs();
         for (int i = 0; i < inputs.size(); i++) {
             builder.addSlot(mezz.jei.api.recipe.RecipeIngredientRole.INPUT, slotPositions[i][0], slotPositions[i][1])
                 .addItemStacks(Arrays.asList(inputs.get(i).getItems()));
         }
         builder.addSlot(mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT, 79, 58)
-            .addItemStack(alloySmelterRecipe.getResultItem(null));
+            .addItemStack(recipe.getResultItem(null));
     }
 }
