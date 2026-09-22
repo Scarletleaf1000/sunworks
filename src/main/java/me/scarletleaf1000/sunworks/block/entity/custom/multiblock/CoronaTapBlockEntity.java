@@ -6,6 +6,7 @@ import me.scarletleaf1000.sunworks.block.entity.custom.ISyncedBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.multiblocks.MBBuildingBlock;
 import me.scarletleaf1000.sunworks.multiblocks.MultiblockTileController;
+import me.scarletleaf1000.sunworks.multiblocks.ports.IEnergyPortHost;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CoronaTapBlockEntity extends MultiblockTileController implements ISyncedBlockEntity {
+public class CoronaTapBlockEntity extends MultiblockTileController implements ISyncedBlockEntity, IEnergyPortHost {
 
     public static final int DEFAULT_BURST_DELAY_TICKS = 2400; // 2 mins TODO add to config
     public static final int DEFAULT_GENERATION_FE = 50_000_000; // TODO add to config
@@ -121,43 +122,22 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         generationFE = (int) ((DEFAULT_GENERATION_FE + totalGenerationSum) * totalGenerationMult);
         burstDelayTicks = (int) ((DEFAULT_BURST_DELAY_TICKS + totalDelaySum) * totalDelayMult);
 
-        delayTick = burstDelayTicks;
-    }
-
-    private void bindPortsToEnergy() {
-        for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-            port.addOwnersCapability(this.energy);
-    }
-    public void invalidatePorts() {
-        for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-            port.invalidate();
+        this.delayTick = Math.min(this.delayTick, this.burstDelayTicks);
     }
 
     @Override
-    protected void handleBuiltStateChange(boolean built) {
-        assert level != null;
-
-        if (built) {
-            bindPortsToEnergy();
-            recalcModifiers();
-        } else {
-            invalidatePorts();
-
-            burstDelayTicks = DEFAULT_BURST_DELAY_TICKS;
-            generationFE = DEFAULT_GENERATION_FE;
-        }
-
-        syncToTrackingClients();
-        setChanged();
+    protected void onStructureFormed() {
+        recalcModifiers();
     }
 
     @Override
-    protected void onStructureBlocksUpdated() {
-        super.onStructureBlocksUpdated();
-        assert level != null;
+    protected void onStructureUnformed() {
+        this.burstDelayTicks = DEFAULT_BURST_DELAY_TICKS;
+        this.generationFE = DEFAULT_GENERATION_FE;
+    }
 
-        syncToTrackingClients();
-        bindPortsToEnergy();
+    @Override
+    protected void onStructureUpdated() {
         recalcModifiers();
     }
 
@@ -168,7 +148,13 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
     }
 
     @Override
+    public @NotNull IEnergyStorage getMultiblockEnergy() {
+        return energy;
+    }
+
+    @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putInt("energy", energy.getEnergyStored());
         tag.putInt("burstDelayTicks", burstDelayTicks);
         tag.putInt("generationFE", generationFE);
@@ -177,6 +163,7 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.energy.setEnergy(tag.getInt("energy"));
 
         burstDelayTicks = tag.getInt("burstDelayTicks");
@@ -185,22 +172,12 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-
-        if (this.level != null && isBuilt())
-            bindPortsToEnergy();
-    }
-
-    @Override
     public void writeSyncData(CompoundTag tag, HolderLookup.Provider registries) {
-        saveAdditional(tag, registries);
+        tag.putInt("energy", energy.getEnergyStored());
     }
 
     @Override
     public void readSyncData(CompoundTag tag, HolderLookup.Provider registries) {
-        loadAdditional(tag, registries);
-        if (this.level != null && isBuilt())
-            bindPortsToEnergy();
+        this.energy.setEnergy(tag.getInt("energy"));
     }
 }

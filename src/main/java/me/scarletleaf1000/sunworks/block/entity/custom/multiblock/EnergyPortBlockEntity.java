@@ -3,8 +3,10 @@ package me.scarletleaf1000.sunworks.block.entity.custom.multiblock;
 import me.scarletleaf1000.sunworks.block.custom.multiblock.EnergyPortBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
+import me.scarletleaf1000.sunworks.multiblocks.MultiblockTileController;
 import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlock;
 import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlockEntity;
+import me.scarletleaf1000.sunworks.multiblocks.ports.IEnergyPortHost;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,6 +79,13 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
             ModEnergyUtil.move(worldPosition, worldPosition.relative(getFacing()), getIORate(), level);
         } else {
             ModEnergyUtil.move(worldPosition.relative(getFacing()), worldPosition, getIORate(), level);
+        }
+    }
+
+    @Override
+    public void bindToController(MultiblockTileController controller) {
+        if (controller instanceof IEnergyPortHost energyHost) {
+            addOwnersCapability(energyHost.getMultiblockEnergy());
         }
     }
 

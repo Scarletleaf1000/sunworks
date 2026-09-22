@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks.block.custom.multiblock;
 import com.mojang.serialization.MapCodec;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.custom.multiblock.CoronaTapBlockEntity;
+import me.scarletleaf1000.sunworks.multiblocks.MultiblockTileController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -31,11 +32,11 @@ public class CoronaTapBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         // Only execute if the block type actually changed (i.e. block was broken/replaced, not state update)
-        if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof CoronaTapBlockEntity controller) {
-                controller.invalidatePorts();
-            }
-        }
+        if (!state.is(newState.getBlock()))
+            if (level.getBlockEntity(pos) instanceof MultiblockTileController controller)
+                controller.unbindAllPorts();
+
+
         super.onRemove(state, level, pos, newState, isMoving);
     }
 

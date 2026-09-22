@@ -1,5 +1,6 @@
 package me.scarletleaf1000.sunworks.multiblocks.ports;
 
+import me.scarletleaf1000.sunworks.multiblocks.MultiblockTileController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,7 +19,7 @@ public abstract class CapabilityPortBlockEntity<C> extends BlockEntity {
 
     public abstract void tick();
 
-    public void invalidate() {
+    public void invalidatePorts() {
         mbCapability = null;
 
         if (this.level != null) {
@@ -26,6 +27,8 @@ public abstract class CapabilityPortBlockEntity<C> extends BlockEntity {
             this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
         }
     }
+
+    public abstract void bindToController(MultiblockTileController controller);
 
     public abstract void addOwnersCapability(C ownerCapability);
 
