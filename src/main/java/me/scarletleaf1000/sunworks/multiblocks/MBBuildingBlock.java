@@ -1,5 +1,6 @@
 package me.scarletleaf1000.sunworks.multiblocks;
 
+import com.google.common.base.Suppliers;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -19,12 +20,13 @@ public class MBBuildingBlock implements Predicate<BlockState> {
 
     @SafeVarargs
     public MBBuildingBlock(Supplier<? extends Block>... blockSuppliers) {
-        this.predicate = state -> {
-            Set<Block> resolved = Arrays.stream(blockSuppliers)
-                    .map(Supplier::get)
-                    .collect(Collectors.toSet());
-            return resolved.contains(state.getBlock());
-        };
+        // Lazily resolve suppliers once blocks are registered
+        Supplier<Set<Block>> memoizedSet = Suppliers.memoize(() ->
+                Arrays.stream(blockSuppliers)
+                        .map(Supplier::get)
+                        .collect(Collectors.toSet())
+        );
+        this.predicate = state -> memoizedSet.get().contains(state.getBlock());
     }
 
     public MBBuildingBlock(Predicate<BlockState> predicate) {
@@ -52,10 +54,4 @@ public class MBBuildingBlock implements Predicate<BlockState> {
     );
     public static final MBBuildingBlock SIMPLE_CASING_BLOCK = new MBBuildingBlock(ModBlocks.SIMPLE_MACHINE_CASING);
 
-//    public static final MBBuildingBlock DIRTS = new MBBuildingBlock(
-//            () -> Blocks.DIRT,
-//            () -> Blocks.DIRT_PATH,
-//            () -> Blocks.COARSE_DIRT,
-//            () -> Blocks.ROOTED_DIRT
-//    ); EXAMPLE
 }
