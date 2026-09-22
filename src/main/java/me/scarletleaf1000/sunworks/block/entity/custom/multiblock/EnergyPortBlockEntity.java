@@ -8,97 +8,79 @@ import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.energy.EmptyEnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStorage> {
 
+    // Cached wrapper instance created once per BlockEntity life cycle
+    private final IEnergyStorage portEnergyStorage = new IEnergyStorage() {
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            return (mbCapability != null && canReceive()) ? mbCapability.receiveEnergy(maxReceive, simulate) : 0;
+        }
+
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return (mbCapability != null && canExtract()) ? mbCapability.extractEnergy(maxExtract, simulate) : 0;
+        }
+
+        @Override
+        public int getEnergyStored() {
+            return mbCapability != null ? mbCapability.getEnergyStored() : 0;
+        }
+
+        @Override
+        public int getMaxEnergyStored() {
+            return mbCapability != null ? mbCapability.getMaxEnergyStored() : 0;
+        }
+
+        @Override
+        public boolean canExtract() {
+            return mbCapability != null && getIOState() == CapabilityPortBlock.IOState.PUSH;
+        }
+
+        @Override
+        public boolean canReceive() {
+            return mbCapability != null && getIOState() == CapabilityPortBlock.IOState.PULL;
+        }
+    };
+
     public EnergyPortBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.ENERGY_PORT_BE.get(), pos, blockState);
-        // Initialize superclass field to EmptyEnergyStorage so mbCapability is never null
-        this.mbCapability = EmptyEnergyStorage.INSTANCE;
+    }
+
+    public void addOwnersCapability(IEnergyStorage ownerCapability) {
+        this.mbCapability = ownerCapability;
+        setChanged();
+
+        if (this.level != null) {
+            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
+            this.level.invalidateCapabilities(this.worldPosition);
+            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
+        }
     }
 
     public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-        if (direction == null || direction == getFacing())
-            return mbCapability;
+        // Direct direction check & capability availability test with no allocations
+        if ((direction == null || direction == getFacing())) {
+            return portEnergyStorage;
+        }
         return null;
     }
 
     @Override
     public void tick() {
-        if (level == null || level.isClientSide()) return;
+        if (level == null || level.isClientSide() || mbCapability == null) return;
 
-        if (getIOState() == CapabilityPortBlock.IOState.PUSH)
+        if (getIOState() == CapabilityPortBlock.IOState.PUSH) {
             ModEnergyUtil.move(worldPosition, worldPosition.relative(getFacing()), getIORate(), level);
-        else
+        } else {
             ModEnergyUtil.move(worldPosition.relative(getFacing()), worldPosition, getIORate(), level);
-    }
-
-    @Override
-    public void addOwnersCapability(IEnergyStorage ownerCapability) {
-        this.mbCapability = new PortEnergyStorage(ownerCapability);
-        setChanged();
-
-        if (this.level != null) {
-            // Tell NeoForge and adjacent cables (Mekanism) to flush cached capabilities
-            invalidateCapabilities();
-
-            // Notify adjacent blocks (cables) to re-check connections
-            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
         }
-    }
-
-    @Override
-    public void invalidate() {
-        this.mbCapability = EmptyEnergyStorage.INSTANCE;
-        setChanged();
-        invalidateCapabilities();
-        if (this.level != null)
-            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
     }
 
     protected int getIORate() {
         return ((EnergyPortBlock) getBlockState().getBlock()).ioRate;
-    }
-
-    public class PortEnergyStorage implements IEnergyStorage {
-        private final @NotNull IEnergyStorage energyStorage;
-
-        public PortEnergyStorage(@NotNull IEnergyStorage mbEnergyStorage) {
-            energyStorage = mbEnergyStorage;
-        }
-
-        @Override
-        public int receiveEnergy(int toReceive, boolean simulate) {
-            return energyStorage.receiveEnergy(toReceive, simulate);
-        }
-
-        @Override
-        public int extractEnergy(int toExtract, boolean simulate) {
-            return energyStorage.extractEnergy(toExtract, simulate);
-        }
-
-        @Override
-        public int getEnergyStored() {
-            return energyStorage.getEnergyStored();
-        }
-
-        @Override
-        public int getMaxEnergyStored() {
-            return energyStorage.getMaxEnergyStored();
-        }
-
-        @Override
-        public boolean canExtract() {
-            return getIOState() == CapabilityPortBlock.IOState.PUSH;
-        }
-
-        @Override
-        public boolean canReceive() {
-            return getIOState() == CapabilityPortBlock.IOState.PULL;
-        }
     }
 }

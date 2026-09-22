@@ -6,9 +6,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.Nullable;
+
 public abstract class CapabilityPortBlockEntity<C> extends BlockEntity {
 
-    protected C mbCapability;
+    protected @Nullable C mbCapability;
 
     public CapabilityPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
@@ -18,6 +20,11 @@ public abstract class CapabilityPortBlockEntity<C> extends BlockEntity {
 
     public void invalidate() {
         mbCapability = null;
+
+        if (this.level != null) {
+            this.level.invalidateCapabilities(this.worldPosition);
+            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
+        }
     }
 
     public abstract void addOwnersCapability(C ownerCapability);
