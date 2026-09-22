@@ -6,6 +6,9 @@ public abstract class ModEnergyStorage extends EnergyStorage {
     public ModEnergyStorage(int capacity, int maxTransfer) {
         super(capacity, maxTransfer);
     }
+    public ModEnergyStorage(int capacity, int maxReceive, int maxExtract) {
+        super(capacity, maxReceive, maxExtract);
+    }
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
@@ -27,9 +30,9 @@ public abstract class ModEnergyStorage extends EnergyStorage {
         return receiveEnergy;
     }
 
-
     public int setEnergy(int energy) {
         this.energy = energy;
+        onEnergyChanged();
         return energy;
     }
 

@@ -29,6 +29,17 @@ public class CoronaTapBlock extends BaseEntityBlock {
     }
 
     @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        // Only execute if the block type actually changed (i.e. block was broken/replaced, not state update)
+        if (!state.is(newState.getBlock())) {
+            if (level.getBlockEntity(pos) instanceof CoronaTapBlockEntity controller) {
+                controller.invalidatePorts();
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new CoronaTapBlockEntity(blockPos, blockState);
     }

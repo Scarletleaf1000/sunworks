@@ -8,6 +8,7 @@ import me.scarletleaf1000.sunworks.multiblocks.ports.CapabilityPortBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.energy.EmptyEnergyStorage;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,10 +17,13 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
 
     public EnergyPortBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.ENERGY_PORT_BE.get(), pos, blockState);
+        // Initialize superclass field to EmptyEnergyStorage so mbCapability is never null
+        this.mbCapability = EmptyEnergyStorage.INSTANCE;
     }
 
     public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-        if (direction==null || getFacing() == direction) return mbCapability;
+        if (direction == null || direction == getFacing())
+            return mbCapability;
         return null;
     }
 
@@ -27,7 +31,7 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
     public void tick() {
         if (level == null || level.isClientSide()) return;
 
-        if (getIOState() == CapabilityPortBlock.IOState.PULL)
+        if (getIOState() == CapabilityPortBlock.IOState.PUSH)
             ModEnergyUtil.move(worldPosition, worldPosition.relative(getFacing()), getIORate(), level);
         else
             ModEnergyUtil.move(worldPosition.relative(getFacing()), worldPosition, getIORate(), level);
@@ -37,9 +41,23 @@ public class EnergyPortBlockEntity extends CapabilityPortBlockEntity<IEnergyStor
     public void addOwnersCapability(IEnergyStorage ownerCapability) {
         this.mbCapability = new PortEnergyStorage(ownerCapability);
         setChanged();
-        if (this.level != null && !this.level.isClientSide()) {
-            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
+
+        if (this.level != null) {
+            // Tell NeoForge and adjacent cables (Mekanism) to flush cached capabilities
+            invalidateCapabilities();
+
+            // Notify adjacent blocks (cables) to re-check connections
+            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
         }
+    }
+
+    @Override
+    public void invalidate() {
+        this.mbCapability = EmptyEnergyStorage.INSTANCE;
+        setChanged();
+        invalidateCapabilities();
+        if (this.level != null)
+            this.level.updateNeighborsAt(this.worldPosition, getBlockState().getBlock());
     }
 
     protected int getIORate() {

@@ -151,6 +151,7 @@ dependencies {
 
     runtimeOnly "maven.modrinth:nvQzSEkH:eYz2YBGT" //for testing
     runtimeOnly "maven.modrinth:Ce6I4WUE:5KzzycBT" //mekanism for testing purposes
+    runtimeOnly "maven.modrinth:6pku8gW1:gGPYiXzr" //Energized Power for testing purposes
     jarJar(implementation("net.createmod.ponder:ponder-neoforge")) {
         version {
             prefer "${ponder_version}+mc${minecraft_version}"

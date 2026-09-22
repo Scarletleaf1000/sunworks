@@ -29,7 +29,7 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
 
     private static Map<BlockPos, MBBuildingBlock> structure = null;
 
-    ModEnergyStorage energy = new ModEnergyStorage(300_000_000, Integer.MAX_VALUE) { // The ports define the max in/out
+    ModEnergyStorage energy = new ModEnergyStorage(300_000_000, 0, Integer.MAX_VALUE) { // The ports define the max in/out
         @Override
         public void onEnergyChanged() {
             setChanged();
@@ -46,7 +46,7 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         super.tick();
 
         if (!isBuilt()) return;
-        if (delayTick!=0) {
+        if (delayTick != 0) {
             delayTick--;
             return;
         }
@@ -123,24 +123,30 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         delayTick = burstDelayTicks;
     }
 
+    private void bindPortsToEnergy() {
+        for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
+            port.addOwnersCapability(this.energy);
+    }
+    public void invalidatePorts() {
+        for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
+            port.invalidate();
+    }
+
     @Override
     protected void handleBuiltStateChange(boolean built) {
         assert level != null;
 
         if (built) {
-            for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-                port.addOwnersCapability(this.energy);
-
+            bindPortsToEnergy();
             recalcModifiers();
-        }
-        else {
-            for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-                port.invalidate();
+        } else {
+            invalidatePorts();
 
             burstDelayTicks = DEFAULT_BURST_DELAY_TICKS;
             generationFE = DEFAULT_GENERATION_FE;
         }
 
+        syncToTrackingClients();
         setChanged();
     }
 
@@ -149,9 +155,8 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         super.onStructureBlocksUpdated();
         assert level != null;
 
-        for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-            port.addOwnersCapability(this.energy);
-
+        syncToTrackingClients();
+        bindPortsToEnergy();
         recalcModifiers();
     }
 
@@ -164,7 +169,6 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putInt("energy", energy.getEnergyStored());
-
         tag.putInt("burstDelayTicks", burstDelayTicks);
         tag.putInt("generationFE", generationFE);
         tag.putInt("delayTick", delayTick);
@@ -177,10 +181,14 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         burstDelayTicks = tag.getInt("burstDelayTicks");
         generationFE = tag.getInt("generationFE");
         delayTick = tag.getInt("delayTick");
+    }
 
-        if (this.level != null && this.level.isClientSide() && isBuilt())
-            for (EnergyPortBlockEntity port : getBlockEntities(MBBuildingBlock.ENERGY_PORT, EnergyPortBlockEntity.class))
-                port.addOwnersCapability(this.energy);
+    @Override
+    public void onLoad() {
+        super.onLoad();
+
+        if (this.level != null && isBuilt())
+            bindPortsToEnergy();
     }
 
     @Override
@@ -191,5 +199,7 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
     @Override
     public void readSyncData(CompoundTag tag, HolderLookup.Provider registries) {
         loadAdditional(tag, registries);
+        if (this.level != null && isBuilt())
+            bindPortsToEnergy();
     }
 }
