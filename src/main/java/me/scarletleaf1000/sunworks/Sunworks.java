@@ -1,6 +1,7 @@
 package me.scarletleaf1000.sunworks;
 
 import com.mojang.logging.LogUtils;
+import me.scarletleaf1000.sunworks.beams.ModBeamTypes;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.client.renderer.blockentity.ReflectionPanelRenderer;
@@ -62,6 +63,8 @@ public class Sunworks {
         ModEntityTypes.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
+
+        ModBeamTypes.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (Sunworks) to respond directly to events.
