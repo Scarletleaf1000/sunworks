@@ -72,7 +72,7 @@ public class SolarAlloySmelterBlockEntity extends BlockEntity implements MenuPro
     private int DEFAULT_MAX_PROGRESS = 600;
     private static final int TIME_MULTIPLIER = 3;
 
-    public  SolarAlloySmelterBlockEntity(BlockPos pos, BlockState blockState) {
+    public SolarAlloySmelterBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_ALLOY_SMELTER_BE.get(), pos, blockState);
         this.data = new ContainerData() {
             @Override
