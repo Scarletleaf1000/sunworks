@@ -49,6 +49,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.ANCHOR_CASING.get());
         dropSelf(ModBlocks.CORONA_TAP.get());
         dropSelf(ModBlocks.CORONA_TAP_INTERFACE.get());
+        dropSelf(ModBlocks.SIMPLE_LASER.get());
+        dropSelf(ModBlocks.SUNWELL.get());
 
         dropOther(ModBlocks.DEAD_CHORUS_PLANT.get(), ModItems.CHORUS_HUSK.get());
 

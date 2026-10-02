@@ -86,6 +86,9 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.ANCHOR_CASING);
                        output.accept(ModBlocks.CORONA_TAP);
                        output.accept(ModBlocks.CORONA_TAP_INTERFACE);
+
+                       output.accept(ModBlocks.SIMPLE_LASER);
+                       output.accept(ModBlocks.SUNWELL);
                     }).build());
 
     public static void register(IEventBus eventBus) {
