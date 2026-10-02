@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks.block;
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.custom.BuddingHelioliteBlock;
 import me.scarletleaf1000.sunworks.block.custom.logistics.SimpleLaserBlock;
+import me.scarletleaf1000.sunworks.block.custom.logistics.SunwellBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.HelioreceiverBlock;
@@ -189,6 +190,15 @@ public class ModBlocks {
             ),
             block -> new DescriptiveBlockItem(block, new Item.Properties(),
                     Component.translatable("tooltip.sunworks.laser.description")));
+
+    public static final DeferredBlock<Block> SUNWELL = registerBlock("sunwell",
+            () -> new SunwellBlock(BlockBehaviour.Properties.of()
+                    .strength(3.5f, 5f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()
+            ),
+            block -> new DescriptiveBlockItem(block, new Item.Properties(),
+                    Component.translatable("tooltip.sunworks.sunwell.description")));
 
 
     private static DeferredBlock<Block> registerOre(String name, boolean deepslate) {

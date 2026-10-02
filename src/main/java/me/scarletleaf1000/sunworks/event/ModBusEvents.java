@@ -4,6 +4,7 @@ import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.HelioreceiverBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.logistics.SunwellBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.SolarAlloySmelterBlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,5 +26,7 @@ public class ModBusEvents {
                 ModBlockEntities.HELIORECEIVER_BE.get(), HelioreceiverBlockEntity::getEnergyStorage);
         e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
                 ModBlockEntities.ALLOY_SMELTER_BE.get(), AlloySmelterBlockEntity::getEnergyStorage);
+        e.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
+                ModBlockEntities.SUNWELL_BE.get(), SunwellBlockEntity::getEnergyStorage);
     }
 }

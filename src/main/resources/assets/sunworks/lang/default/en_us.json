@@ -51,10 +51,12 @@
   "block.sunworks.corona_tap": "Corona Tap",
   "block.sunworks.corona_tap_interface": "Corona Tap Interface",
   "block.sunworks.simple_laser": "Simple Laser",
+  "block.sunworks.sunwell": "Sunwell",
 
   "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",
   "tooltip.sunworks.helioreceiver.description": "Generates power from linked reflection panels.",
   "tooltip.sunworks.laser.description": "Shoots a laser out of a connected inventory to transfer power.",
+  "tooltip.sunworks.sunwell.description": "Charges when powered with a redstone signal, Discharges when unpowered.",
 
   "block.menu.sunworks.solar_alloy_smelter": "Simple Solar Alloy Smelter",
   "block.menu.sunworks.alloy_smelter": "Alloy Smelter",
