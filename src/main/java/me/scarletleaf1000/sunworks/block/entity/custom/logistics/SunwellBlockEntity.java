@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SunwellBlockEntity extends BlockEntity {
-    private final int MAX_TRANSFER = 65536;
-    private final int MAX_STORAGE = 131072;
+    private final int MAX_TRANSFER = 262144;
+    private final int MAX_STORAGE = 1048576;
 
     public SunwellBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.SUNWELL_BE.get(), pos, blockState);
@@ -36,6 +36,17 @@ public class SunwellBlockEntity extends BlockEntity {
             public void onEnergyChanged() {
                 setChanged();
                 getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+
+            @Override
+            public boolean canReceive() {
+                return getBlockState().getValue(SunwellBlock.POWERED) && super.canReceive();
+            }
+
+            @Override
+            public int receiveEnergy(int maxReceive, boolean simulate) {
+                if (!getBlockState().getValue(SunwellBlock.POWERED)) return 0;
+                return super.receiveEnergy(maxReceive, simulate);
             }
         };
     }
