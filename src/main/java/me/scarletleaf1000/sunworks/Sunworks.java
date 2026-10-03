@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks;
 import com.mojang.logging.LogUtils;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.client.overlay.MachineOverlayRenderer;
 import me.scarletleaf1000.sunworks.client.renderer.blockentity.ReflectionPanelRenderer;
 import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
@@ -33,8 +34,10 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -126,6 +129,14 @@ public class Sunworks {
         public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(ModEntityTypes.CORRUPTED_PEARL.get(), ThrownItemRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.REFLECTION_PANEL_BE.get(), ReflectionPanelRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+            event.registerAboveAll(
+                    ResourceLocation.fromNamespaceAndPath(Sunworks.MOD_ID, "machine_overlay_layer"),
+                    new MachineOverlayRenderer()
+            );
         }
     }
 }

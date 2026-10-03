@@ -101,5 +101,7 @@
   "gui.sunworks.io_type.item_input": "Item Input",
   "gui.sunworks.io_type.item_output": "Item Output",
   "gui.sunworks.io_type.fluid_input": "Fluid Input",
-  "gui.sunworks.io_type.fluid_output": "Fluid Output"
+  "gui.sunworks.io_type.fluid_output": "Fluid Output",
+
+  "overlay.sunworks.solar_panel.generating": "Generating %sFE/t"
 }

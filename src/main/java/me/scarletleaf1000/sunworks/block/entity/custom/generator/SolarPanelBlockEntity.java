@@ -1,13 +1,17 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
 import me.scarletleaf1000.sunworks.block.entity.io.ConfigurableMachine;
 import me.scarletleaf1000.sunworks.block.entity.io.IOType;
 import me.scarletleaf1000.sunworks.block.entity.io.RelativeSide;
 import me.scarletleaf1000.sunworks.block.entity.io.SideConfiguration;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayBar;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelMenu;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -30,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine {
+public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine, IOverlayInfoProvider {
     private static final Set<IOType> SUPPORTED_TYPES = Set.of(IOType.ENERGY_OUTPUT);
 
     private final SideConfiguration sideConfiguration = new SideConfiguration();
@@ -109,8 +113,11 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
         return side == RelativeSide.DOWN;
     }
 
+    private int toGenerate = 0;
+
     public void tick(Level level, BlockPos pos, BlockState state) {
-        generatePower(getSunlightPower(level, pos));
+        toGenerate = getSunlightPower(level, pos);
+        generatePower(toGenerate);
         ejectEnergy(level, pos);
     }
 
@@ -192,5 +199,17 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket kt, HolderLookup.Provider registries) {
         super.onDataPacket(net, kt, registries);
+    }
+
+    @Override
+    public boolean addOverlayInfo(OverlayContext ctx) {
+        int stored = ENERGY_STORAGE.getEnergyStored();
+        int max = ENERGY_STORAGE.getMaxEnergyStored();
+        float progress = max > 0 ? (float) stored / max : 0f;
+
+        ctx.addDescription(Component.translatable("overlay.sunworks.solar_panel.generating", toGenerate).withStyle(ChatFormatting.GRAY));
+        ctx.addBar(new OverlayBar(Component.literal("FE"), progress));
+
+        return true;
     }
 }
