@@ -57,10 +57,6 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("sunwell_be", () -> BlockEntityType.Builder.of(
                     SunwellBlockEntity::new, ModBlocks.SUNWELL.get()).build(null));
 
-    public static final Supplier<BlockEntityType<CoronaTapInterfaceBlockEntity>> CORONA_TAP_INTERFACE_BE =
-            BLOCK_ENTITIES.register("corona_tap_interface_be", () -> BlockEntityType.Builder.of(
-                    CoronaTapInterfaceBlockEntity::new, ModBlocks.CORONA_TAP_INTERFACE.get()).build(null));
-
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
