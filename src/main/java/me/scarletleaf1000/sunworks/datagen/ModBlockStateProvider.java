@@ -40,10 +40,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SIMPLE_MACHINE_CASING);
         blockWithItem(ModBlocks.ADVANCED_MACHINE_CASING);
         blockWithItem(ModBlocks.ULTIMATE_MACHINE_CASING);
+
+        //blockWithItem(ModBlocks.ENERGY_PORT);
+        //blockWithItem(ModBlocks.CORONA_TAP);
+        //blockWithItem(ModBlocks.MODIFIER_BLOCK1);
+        //blockWithItem(ModBlocks.MODIFIER_BLOCK2);
+        //blockWithItem(ModBlocks.MODIFIER_BLOCK3);
+        //blockWithItem(ModBlocks.MODIFIER_BLOCK4);
         //blockWithItem(ModBlocks.STEADY_ANCHOR);
         //blockWithItem(ModBlocks.VOLATILE_ANCHOR);
         //blockWithItem(ModBlocks.ANCHOR_CASING);
-        //blockWithItem(ModBlocks.CORONA_TAP);
         //simpleBlockWithItem(ModBlocks.CORONA_TAP_INTERFACE.get(), cubeAll(ModBlocks.CORONA_TAP_INTERFACE.get()));
 
         horizontalFaceBlock(ModBlocks.SOLAR_ALLOY_SMELTER, true, true);
@@ -109,7 +115,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block.get(), offModel);
     }
 
-    private void blockWithItem(DeferredBlock<Block> block) {
+    private void blockWithItem(DeferredBlock<? extends Block> block) {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
     }
 }

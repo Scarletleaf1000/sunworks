@@ -2,6 +2,7 @@ package me.scarletleaf1000.sunworks.block;
 
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.custom.BuddingHelioliteBlock;
+import me.scarletleaf1000.sunworks.block.custom.ModifierBlock;
 import me.scarletleaf1000.sunworks.block.custom.logistics.SimpleLaserBlock;
 import me.scarletleaf1000.sunworks.block.custom.logistics.SunwellBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
@@ -9,16 +10,16 @@ import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock
 import me.scarletleaf1000.sunworks.block.custom.generator.HelioreceiverBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.ReflectionPanelBlock;
 import me.scarletleaf1000.sunworks.block.custom.generator.SolarPanelBlock;
-import me.scarletleaf1000.sunworks.block.custom.CoronaTapInterfaceBlock;
+import me.scarletleaf1000.sunworks.block.custom.multiblock.CoronaTapBlock;
+import me.scarletleaf1000.sunworks.block.custom.multiblock.EnergyPortBlock;
+import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
+import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
 import me.scarletleaf1000.sunworks.item.ModItems;
 import me.scarletleaf1000.sunworks.item.custom.DescriptiveBlockItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.AmethystClusterBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChorusPlantBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -74,28 +75,8 @@ public class ModBlocks {
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> STEADY_ANCHOR = registerBlock("steady_anchor",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> VOLATILE_ANCHOR = registerBlock("volatile_anchor",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> ANCHOR_CASING = registerBlock("anchor_casing",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> CORONA_TAP = registerBlock("corona_tap",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<CoronaTapInterfaceBlock> CORONA_TAP_INTERFACE = registerBlock("corona_tap_interface",
-            () -> new CoronaTapInterfaceBlock(BlockBehaviour.Properties.of()
+            () -> new CoronaTapBlock(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
@@ -181,6 +162,19 @@ public class ModBlocks {
             ),
             block -> new DescriptiveBlockItem(block, new Item.Properties(),
                     Component.translatable("tooltip.sunworks.helioreceiver.description")));
+
+    public static final DeferredBlock<EnergyPortBlock> ENERGY_PORT = registerBlock("energy_port",
+            () -> new EnergyPortBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 100_000));
+
+    //Corona Tap Modifier Blocks
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK1 = registerBlock("modifier1",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), -100,0,1,0.95f));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK2 = registerBlock("modifier2",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 100,0,1,1.1f));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK3 = registerBlock("modifier3",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 10,100_000,1,1));
+    public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK4 = registerBlock("modifier4",
+            () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 0,0,0.75f,0.7f));
 
     public static final DeferredBlock<Block> SIMPLE_LASER = registerBlock("simple_laser",
             () -> new SimpleLaserBlock(BlockBehaviour.Properties.of()

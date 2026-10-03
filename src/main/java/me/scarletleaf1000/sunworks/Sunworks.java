@@ -1,27 +1,28 @@
 package me.scarletleaf1000.sunworks;
 
 import com.mojang.logging.LogUtils;
+import me.scarletleaf1000.sunworks.beams.ModBeamTypes;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.client.renderer.blockentity.ReflectionPanelRenderer;
+import me.scarletleaf1000.sunworks.compat.ponder.PonderSunworksPlugin;
 import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
-import me.scarletleaf1000.sunworks.compat.ponder.PonderSunworksPlugin;
 import me.scarletleaf1000.sunworks.recipe.ModRecipes;
 import me.scarletleaf1000.sunworks.screen.ModMenuTypes;
-import me.scarletleaf1000.sunworks.worldgen.ModFeatures;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
+import me.scarletleaf1000.sunworks.worldgen.ModFeatures;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
-import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,7 +35,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -63,6 +63,8 @@ public class Sunworks {
         ModEntityTypes.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
+
+        ModBeamTypes.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (Sunworks) to respond directly to events.
@@ -97,7 +99,7 @@ public class Sunworks {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

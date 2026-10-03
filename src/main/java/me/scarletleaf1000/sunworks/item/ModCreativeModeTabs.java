@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -81,11 +80,12 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.SIMPLE_MACHINE_CASING);
                        output.accept(ModBlocks.ADVANCED_MACHINE_CASING);
                        output.accept(ModBlocks.ULTIMATE_MACHINE_CASING);
-                       output.accept(ModBlocks.STEADY_ANCHOR);
-                       output.accept(ModBlocks.VOLATILE_ANCHOR);
-                       output.accept(ModBlocks.ANCHOR_CASING);
                        output.accept(ModBlocks.CORONA_TAP);
-                       output.accept(ModBlocks.CORONA_TAP_INTERFACE);
+                       output.accept(ModBlocks.ENERGY_PORT);
+                       output.accept(ModBlocks.MODIFIER_BLOCK1);
+                       output.accept(ModBlocks.MODIFIER_BLOCK2);
+                       output.accept(ModBlocks.MODIFIER_BLOCK3);
+                       output.accept(ModBlocks.MODIFIER_BLOCK4);
 
                        output.accept(ModBlocks.SIMPLE_LASER);
                        output.accept(ModBlocks.SUNWELL);
