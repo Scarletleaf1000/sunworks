@@ -71,31 +71,11 @@ public class ModBlocks {
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> STEADY_ANCHOR = registerBlock("steady_anchor",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> VOLATILE_ANCHOR = registerBlock("volatile_anchor",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> ANCHOR_CASING = registerBlock("anchor_casing",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(5f, 6f)
-                    .sound(SoundType.METAL)
-                    .requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> CORONA_TAP = registerBlock("corona_tap",
             () -> new CoronaTapBlock(BlockBehaviour.Properties.of()
                     .strength(5f, 6f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
-//    public static final DeferredBlock<CoronaTapInterfaceBlock> CORONA_TAP_INTERFACE = registerBlock("corona_tap_interface",
-//            () -> new CoronaTapInterfaceBlock(BlockBehaviour.Properties.of()
-//                    .strength(5f, 6f)
-//                    .sound(SoundType.METAL)
-//                    .requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> CINDERITE_BLOCK = registerBlock("cinderite_block",
             () -> new Block(BlockBehaviour.Properties.of()
