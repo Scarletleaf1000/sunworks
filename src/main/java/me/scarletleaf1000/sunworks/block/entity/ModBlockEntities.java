@@ -5,6 +5,8 @@ import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.HelioreceiverBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.ReflectionPanelBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.generator.SolarPanelBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.logistics.SimpleLaserBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.logistics.SunwellBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.multiblock.CoronaTapBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.multiblock.EnergyPortBlockEntity;
 import me.scarletleaf1000.sunworks.block.entity.custom.processor.AlloySmelterBlockEntity;
@@ -39,16 +41,25 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("helioreceiver_be", () -> BlockEntityType.Builder.of(
                     HelioreceiverBlockEntity::new, ModBlocks.HELIORECEIVER.get()).build(null));
 
-//    public static final Supplier<BlockEntityType<CoronaTapInterfaceBlockEntity>> CORONA_TAP_INTERFACE_BE =
-//            BLOCK_ENTITIES.register("corona_tap_interface_be", () -> BlockEntityType.Builder.of(
-//                    CoronaTapInterfaceBlockEntity::new, ModBlocks.CORONA_TAP_INTERFACE.get()).build(null));
-
     public static final Supplier<BlockEntityType<EnergyPortBlockEntity>> ENERGY_PORT_BE =
             BLOCK_ENTITIES.register("energy_port_be", () -> BlockEntityType.Builder.of(
                     EnergyPortBlockEntity::new, ModBlocks.ENERGY_PORT.get()).build(null));
+
     public static final Supplier<BlockEntityType<CoronaTapBlockEntity>>  CORONA_TAP_BE  =
             BLOCK_ENTITIES.register("corona_tap_be", () -> BlockEntityType.Builder.of(
                     CoronaTapBlockEntity::new, ModBlocks.CORONA_TAP.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SimpleLaserBlockEntity>> SIMPLE_LASER_BE =
+            BLOCK_ENTITIES.register("simple_laser_be", () -> BlockEntityType.Builder.of(
+                    SimpleLaserBlockEntity::new, ModBlocks.SIMPLE_LASER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SunwellBlockEntity>> SUNWELL_BE =
+            BLOCK_ENTITIES.register("sunwell_be", () -> BlockEntityType.Builder.of(
+                    SunwellBlockEntity::new, ModBlocks.SUNWELL.get()).build(null));
+
+    public static final Supplier<BlockEntityType<CoronaTapInterfaceBlockEntity>> CORONA_TAP_INTERFACE_BE =
+            BLOCK_ENTITIES.register("corona_tap_interface_be", () -> BlockEntityType.Builder.of(
+                    CoronaTapInterfaceBlockEntity::new, ModBlocks.CORONA_TAP_INTERFACE.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

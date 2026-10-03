@@ -86,6 +86,9 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.MODIFIER_BLOCK2);
                        output.accept(ModBlocks.MODIFIER_BLOCK3);
                        output.accept(ModBlocks.MODIFIER_BLOCK4);
+
+                       output.accept(ModBlocks.SIMPLE_LASER);
+                       output.accept(ModBlocks.SUNWELL);
                     }).build());
 
     public static void register(IEventBus eventBus) {
