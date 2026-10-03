@@ -5,6 +5,24 @@ import net.minecraft.world.phys.Vec3;
 
 public class BeamUtil {
 
+    public static TemporaryBeam createTemporaryFadeInOrangeBeam(ServerLevel level, Vec3 start, Vec3 end, int maxAge) {
+        return createTemporaryOrangeBeam(level, start, end, 0.8f, 0.08f, maxAge, 1f);
+    }
+
+    public static TemporaryBeam createTemporaryFadeOutOrangeBeam(ServerLevel level, Vec3 start, Vec3 end, int maxAge) {
+        return createTemporaryOrangeBeam(level, start, end, 0.8f, 0.08f, maxAge, 0f);
+    }
+
+    public static TemporaryBeam createTemporaryOrangeBeam(ServerLevel level, Vec3 start, Vec3 end, float alpha, float radius, int maxAge, float targetAlpha) {
+        return createTemporaryBeam(level, start, end, 255, 116, 33, alpha, radius, maxAge, targetAlpha);
+    }
+
+    public static TemporaryBeam createTemporaryBeam(ServerLevel level, Vec3 start, Vec3 end, int red, int green, int blue, float alpha, float radius, int maxAge, float targetAlpha) {
+        TemporaryBeam beam = new TemporaryBeam(level, start, end, red, green, blue, alpha, radius, maxAge, targetAlpha);
+        initiateBeam(level, beam);
+        return beam;
+    }
+
     public static PersistentBeam createPersistentOrangeBeam(ServerLevel level, Vec3 start, Vec3 end) {
         return createPersistentOrangeBeam(level, start, end, 0.8f, 0.08f);
     }

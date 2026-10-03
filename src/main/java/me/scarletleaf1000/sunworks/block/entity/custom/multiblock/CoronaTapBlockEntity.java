@@ -1,5 +1,8 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.multiblock;
 
+import me.scarletleaf1000.sunworks.beams.BeamUtil;
+import me.scarletleaf1000.sunworks.beams.ServerBeamManager;
+import me.scarletleaf1000.sunworks.beams.TemporaryBeam;
 import me.scarletleaf1000.sunworks.block.custom.ModifierBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.custom.ISyncedBlockEntity;
@@ -10,8 +13,11 @@ import me.scarletleaf1000.sunworks.multiblocks.ports.IEnergyPortHost;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,12 +28,15 @@ import java.util.Map;
 
 public class CoronaTapBlockEntity extends MultiblockTileController implements ISyncedBlockEntity, IEnergyPortHost {
 
+    public static final int BEAM_LIFESPAN = 60; // 3 seconds
     public static final int DEFAULT_BURST_DELAY_TICKS = 2400; // 2 mins TODO add to config
     public static final int DEFAULT_GENERATION_FE = 50_000_000; // TODO add to config
     public int burstDelayTicks = DEFAULT_BURST_DELAY_TICKS;
     public int generationFE = DEFAULT_GENERATION_FE;
 
     protected int delayTick = burstDelayTicks;
+
+    protected @Nullable TemporaryBeam beam;
 
     private static Map<BlockPos, MBBuildingBlock> structure = null;
 
@@ -48,11 +57,17 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         super.tick();
 
         if (!isBuilt()) return;
+        if (delayTick == BEAM_LIFESPAN)
+            beam = createTapBeam();
+        else if (delayTick <= 20)
+            createPowerParticles();
+
         if (delayTick != 0) {
             delayTick--;
             return;
         }
         delayTick = burstDelayTicks;
+        beam = null;
 
         int totalEnergy = Math.min(generationFE + energy.getEnergyStored(), energy.getMaxEnergyStored());
         energy.setEnergy(totalEnergy);
@@ -125,6 +140,47 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
         this.delayTick = Math.min(this.delayTick, this.burstDelayTicks);
     }
 
+    protected TemporaryBeam createTapBeam() {
+        if (level == null || level.isClientSide() || !(level instanceof ServerLevel serverLevel))
+            return null;
+
+        return BeamUtil.createTemporaryOrangeBeam(
+                serverLevel, worldPosition.getCenter(),
+                worldPosition.above(100).getCenter(),
+                0.2f, 0.35f, BEAM_LIFESPAN, 1f
+        );
+    }
+
+    protected void createPowerParticles() {
+        if (this.level == null || !(this.level instanceof ServerLevel serverLevel)) return;
+
+        BlockPos pos = this.getBlockPos();
+        Vec3 center = pos.getCenter(); // Center at (X + 0.5, Y + 0.5, Z + 0.5)
+
+        // Glowing beam core rising directly up the center
+        for (int i = 0; i < 5; i++) {
+            double coreOffset = (serverLevel.random.nextDouble() - 0.5) * 0.25;
+
+            serverLevel.sendParticles(
+                    ParticleTypes.END_ROD,
+                    center.x + coreOffset,
+                    pos.getY() + 1.0,
+                    center.z + coreOffset,
+                    1,            // Spawn 1 particle
+                    0.0, 0.5, 0.0, // Upward velocity
+                    0.03          // Speed jitter
+            );
+        }
+
+        if (delayTick == 1) {
+            serverLevel.sendParticles(
+                    ParticleTypes.FLASH,
+                    center.x, pos.getY() + 1.5, center.z,
+                    1, 0, 0, 0, 0
+            );
+        }
+    }
+
     @Override
     protected void onStructureFormed() {
         recalcModifiers();
@@ -134,6 +190,16 @@ public class CoronaTapBlockEntity extends MultiblockTileController implements IS
     protected void onStructureUnformed() {
         this.burstDelayTicks = DEFAULT_BURST_DELAY_TICKS;
         this.generationFE = DEFAULT_GENERATION_FE;
+
+        if (beam != null && (level instanceof ServerLevel serverLevel))
+            ServerBeamManager.removeBeam(serverLevel ,beam.getId());
+    }
+
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        if (beam != null && (level instanceof ServerLevel serverLevel))
+            ServerBeamManager.removeBeam(serverLevel ,beam.getId());
     }
 
     @Override

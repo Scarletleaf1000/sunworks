@@ -37,6 +37,7 @@ public class ClientBeamManager {
         if (dimension != null) {
             BEAMS_BY_DIMENSION.remove(dimension);
         }
+        BEAMS_BY_DIMENSION.entrySet().removeIf(entry -> entry.getValue().isEmpty());
     }
 
     public static void clearBeams() {
@@ -62,7 +63,7 @@ public class ClientBeamManager {
         if (activeBeams == null || activeBeams.isEmpty()) return;
 
         // Only tick beams in the current level
-        activeBeams.removeIf(AbstractBeam::tick);
+        activeBeams.forEach(AbstractBeam::tick);
     }
 
     @SubscribeEvent
