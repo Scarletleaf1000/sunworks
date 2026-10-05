@@ -1,10 +1,12 @@
 package me.scarletleaf1000.sunworks;
 
 import com.mojang.logging.LogUtils;
+import me.scarletleaf1000.sunworks.beams.ModBeamTypes;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.client.overlay.MachineOverlayRenderer;
 import me.scarletleaf1000.sunworks.client.renderer.blockentity.ReflectionPanelRenderer;
+import me.scarletleaf1000.sunworks.compat.ponder.PonderSunworksPlugin;
 import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
@@ -16,7 +18,9 @@ import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -67,6 +71,8 @@ public class Sunworks {
 
         ModCreativeModeTabs.register(modEventBus);
 
+        ModBeamTypes.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (Sunworks) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -100,7 +106,7 @@ public class Sunworks {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

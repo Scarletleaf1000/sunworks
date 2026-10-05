@@ -1,6 +1,7 @@
 package me.scarletleaf1000.sunworks.item;
 
 import me.scarletleaf1000.sunworks.Sunworks;
+import me.scarletleaf1000.sunworks.item.custom.BeamMakerItem;
 import me.scarletleaf1000.sunworks.item.custom.CorruptedPearlItem;
 import me.scarletleaf1000.sunworks.item.custom.SolarWrenchItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -60,6 +61,8 @@ public class ModItems {
 
     public static final DeferredItem<Item> SOLAR_WRENCH = ITEMS.registerItem("solar_wrench",
             SolarWrenchItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> BEAM_MAKER = ITEMS.registerItem("beam_maker",
+            BeamMakerItem::new, new Item.Properties().stacksTo(1));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
