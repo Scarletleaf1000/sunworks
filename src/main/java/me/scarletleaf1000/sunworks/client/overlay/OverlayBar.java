@@ -11,12 +11,14 @@ public class OverlayBar {
     private final TextColor backgroundColor;
     private final int length;
 
+    private final int DEFAULT_LENGTH = 20;
+
     public OverlayBar(Component title, float progress) {
         this.title = title;
         this.progress = progress;
         this.filledColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
         this.backgroundColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
-        this.length = 10;
+        this.length = DEFAULT_LENGTH;
     }
 
     public OverlayBar(Component title, float progress, TextColor filledColor, TextColor backgroundColor) {
@@ -24,7 +26,7 @@ public class OverlayBar {
         this.progress = progress;
         this.filledColor = filledColor;
         this.backgroundColor = backgroundColor;
-        this.length = 10;
+        this.length = DEFAULT_LENGTH;
     }
 
     public OverlayBar(Component title, float progress, TextColor filledColor, TextColor backgroundColor, int length) {

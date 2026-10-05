@@ -44,10 +44,10 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
         Font font = mc.font;
         int contentW = font.width(ctx.getTitle()) + 20;
         for (Component c : lines) contentW = Math.max(contentW, font.width(c));
-        for (OverlayBar b : bars) contentW = Math.max(contentW, b.getLength() * 6);
-        int h = PAD * 2 + 10 + lines.size() * 10 + bars.size() * 12;
+        for (OverlayBar b : bars) contentW = Math.max(contentW, font.width("|".repeat(b.getLength())));
+        int h = PAD * 2 + 10 + lines.size() * 10 + bars.size() * 10;
 
-        int x = g.guiWidth() / 2 - contentW / 2 - PAD;
+        int x = g.guiWidth() / 2 + 12;
         int y = g.guiHeight() / 2 + 12;
         g.fill(x, y, x + contentW + PAD * 2, y + h, BG);
 
@@ -57,11 +57,13 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
         ty += 12;
         for (Component c : lines) { g.drawString(font, c, x + PAD, ty, 0xAAAAAA, false); ty += 10; }
         for (OverlayBar b : bars) {
-            int bw = b.getLength() * 6;
-            g.fill(x + PAD, ty, x + PAD + bw, ty + 6, b.getBackgroundColor().getValue() | 0xFF000000);
-            g.fill(x + PAD, ty, x + PAD + (int) (bw * b.getProgress()), ty + 6,
-                    b.getFilledColor().getValue() | 0xFF000000);
-            ty += 12;
+            int total = b.getLength();
+            int filled = Math.min(total, Math.max(0, Math.round(total * b.getProgress())));
+            g.drawString(font, b.getTitle(), x + PAD, ty, 0xAAAAAA, false);
+            int bx = x + PAD + font.width(b.getTitle()) + 4;
+            g.drawString(font, "|".repeat(total), bx, ty, b.getBackgroundColor().getValue(), false);
+            g.drawString(font, "|".repeat(filled), bx, ty, b.getFilledColor().getValue(), false);
+            ty += 10;
         }
     }
 }

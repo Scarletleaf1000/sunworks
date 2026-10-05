@@ -208,7 +208,7 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
         float progress = max > 0 ? (float) stored / max : 0f;
 
         ctx.addDescription(Component.translatable("overlay.sunworks.solar_panel.generating", toGenerate).withStyle(ChatFormatting.GRAY));
-        ctx.addBar(new OverlayBar(Component.literal("FE"), progress));
+        ctx.addBar(new OverlayBar(Component.literal("FE:"), progress));
 
         return true;
     }
