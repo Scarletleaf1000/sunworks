@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -49,7 +50,7 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
 
         int x = g.guiWidth() / 2 + 12;
         int y = g.guiHeight() / 2 + 12;
-        g.fill(x, y, x + contentW + PAD * 2, y + h, BG);
+        TooltipRenderUtil.renderTooltipBackground(g, x + PAD, y + PAD, contentW, h - PAD * 2, 0);
 
         int ty = y + PAD;
         g.renderItem(ctx.getIcon(), x + PAD, ty - 2);
