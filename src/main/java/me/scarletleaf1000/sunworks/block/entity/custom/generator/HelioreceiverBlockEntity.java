@@ -141,12 +141,13 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
-        if (level.isClientSide) return;
-
         if (scanCooldown++ >= SCAN_INTERVAL) {
             scanCooldown = 0;
             scanReflectors(level, pos, state);
         }
+
+        if (level.isClientSide) return;
+
         generatePower(level);
         ejectEnergy(level, pos);
     }
@@ -204,7 +205,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private int getSunlightPower(Level level, BlockPos pos) {
-        if (level.isClientSide) return 0;
         int minLight = 14;
         if (level.getDayTime() > 23000 || level.getDayTime() < 13000) {
             minLight = 9;
