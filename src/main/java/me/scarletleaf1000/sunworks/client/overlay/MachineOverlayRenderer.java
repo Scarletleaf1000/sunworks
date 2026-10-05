@@ -1,6 +1,7 @@
 package me.scarletleaf1000.sunworks.client.overlay;
 
 import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -45,7 +46,13 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
         Font font = mc.font;
         int contentW = font.width(ctx.getTitle()) + 20;
         for (Component c : lines) contentW = Math.max(contentW, font.width(c));
-        for (OverlayBar b : bars) contentW = Math.max(contentW, font.width("|".repeat(b.getLength())));
+        for (OverlayBar b : bars)
+            contentW = Math.max(contentW, font.width("|".repeat(b.getLength()))
+                + font.width(b.getTitle())
+                + (b.isPercentage() ?
+                    font.width("(" + b.getProgress() + "%)") :
+                    font.width("(" + b.getCurrentValue() + "/" + b.getMaxValue() + ")") )
+                + 8);
         int h = PAD * 2 + 10 + lines.size() * 10 + bars.size() * 10;
 
         int x = g.guiWidth() / 2 + 12;
@@ -64,6 +71,13 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
             int bx = x + PAD + font.width(b.getTitle()) + 4;
             g.drawString(font, "|".repeat(total), bx, ty, b.getBackgroundColor().getValue(), false);
             g.drawString(font, "|".repeat(filled), bx, ty, b.getFilledColor().getValue(), false);
+            Component barValue;
+            if (b.isPercentage())
+                barValue = Component.literal("(" + b.getProgress() + "%)");
+            else
+                barValue = Component.literal("(" + b.getCurrentValue() + "/" + b.getMaxValue() + ")");
+            int cx = bx + font.width("|".repeat(b.getLength())) + 4;
+            g.drawString(font, barValue, cx, ty, 0xAAAAAA, false);
             ty += 10;
         }
     }

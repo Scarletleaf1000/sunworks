@@ -11,6 +11,7 @@ public class OverlayBar {
     private final TextColor filledColor;
     private final TextColor backgroundColor;
     private final int length;
+    private final boolean usePercentage;
 
     private final int DEFAULT_LENGTH = 20;
 
@@ -21,33 +22,37 @@ public class OverlayBar {
         this.filledColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
         this.backgroundColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
         this.length = DEFAULT_LENGTH;
+        this.usePercentage = true;
     }
 
-    public OverlayBar(Component title, int currentValue, int maxValue) {
+    public OverlayBar(Component title, int currentValue, int maxValue, boolean usePercentage) {
         this.title = title;
         this.currentValue = currentValue;
         this.maxValue = maxValue;
         this.filledColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
         this.backgroundColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
         this.length = DEFAULT_LENGTH;
+        this.usePercentage = usePercentage;
     }
 
-    public OverlayBar(Component title, int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor) {
+    public OverlayBar(Component title, int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor, boolean usePercentage) {
         this.title = title;
         this.currentValue = currentValue;
         this.maxValue = maxValue;
         this.filledColor = filledColor;
         this.backgroundColor = backgroundColor;
         this.length = DEFAULT_LENGTH;
+        this.usePercentage = usePercentage;
     }
 
-    public OverlayBar(Component title,  int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor, int length) {
+    public OverlayBar(Component title,  int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor, int length, boolean usePercentage) {
         this.title = title;
         this.currentValue = currentValue;
         this.maxValue = maxValue;
         this.filledColor = filledColor;
         this.backgroundColor = backgroundColor;
         this.length = length;
+        this.usePercentage = usePercentage;
     }
 
     public Component getTitle() {
@@ -77,4 +82,9 @@ public class OverlayBar {
     public int getLength() {
         return length;
     }
+
+    public boolean isPercentage() {
+        return usePercentage;
+    }
+
 }
