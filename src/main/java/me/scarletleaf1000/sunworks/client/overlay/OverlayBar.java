@@ -6,7 +6,8 @@ import net.minecraft.network.chat.TextColor;
 
 public class OverlayBar {
     private final Component title;
-    private final float progress;
+    private final int currentValue;
+    private final int maxValue;
     private final TextColor filledColor;
     private final TextColor backgroundColor;
     private final int length;
@@ -15,23 +16,35 @@ public class OverlayBar {
 
     public OverlayBar(Component title, float progress) {
         this.title = title;
-        this.progress = progress;
+        this.maxValue = 1000;
+        this.currentValue = Math.round(progress * 1000);
         this.filledColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
         this.backgroundColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
         this.length = DEFAULT_LENGTH;
     }
 
-    public OverlayBar(Component title, float progress, TextColor filledColor, TextColor backgroundColor) {
+    public OverlayBar(Component title, int currentValue, int maxValue) {
         this.title = title;
-        this.progress = progress;
+        this.currentValue = currentValue;
+        this.maxValue = maxValue;
+        this.filledColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
+        this.backgroundColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_RED);
+        this.length = DEFAULT_LENGTH;
+    }
+
+    public OverlayBar(Component title, int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor) {
+        this.title = title;
+        this.currentValue = currentValue;
+        this.maxValue = maxValue;
         this.filledColor = filledColor;
         this.backgroundColor = backgroundColor;
         this.length = DEFAULT_LENGTH;
     }
 
-    public OverlayBar(Component title, float progress, TextColor filledColor, TextColor backgroundColor, int length) {
+    public OverlayBar(Component title,  int currentValue, int maxValue, TextColor filledColor, TextColor backgroundColor, int length) {
         this.title = title;
-        this.progress = progress;
+        this.currentValue = currentValue;
+        this.maxValue = maxValue;
         this.filledColor = filledColor;
         this.backgroundColor = backgroundColor;
         this.length = length;
@@ -42,7 +55,15 @@ public class OverlayBar {
     }
 
     public float getProgress() {
-        return progress;
+        return((float)currentValue)/((float)maxValue);
+    }
+
+    public int getCurrentValue() {
+        return currentValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
     }
 
     public TextColor getFilledColor() {
