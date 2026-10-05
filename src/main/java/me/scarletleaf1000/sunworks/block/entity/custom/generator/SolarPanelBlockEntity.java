@@ -113,11 +113,8 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
         return side == RelativeSide.DOWN;
     }
 
-    private int toGenerate = 0;
-
     public void tick(Level level, BlockPos pos, BlockState state) {
-        toGenerate = getSunlightPower(level, pos);
-        generatePower(toGenerate);
+        generatePower(getSunlightPower(level, pos));
         ejectEnergy(level, pos);
     }
 
@@ -140,7 +137,6 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
 
 
     private int getSunlightPower(Level level, BlockPos pos) {
-        if (level.isClientSide) return 0;
         int minLight = 14;
         if (level.getDayTime() > 23000 || level.getDayTime() < 13000) {
             minLight = 9;
@@ -205,10 +201,10 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
     public boolean addOverlayInfo(OverlayContext ctx) {
         int stored = ENERGY_STORAGE.getEnergyStored();
         int max = ENERGY_STORAGE.getMaxEnergyStored();
-        float progress = max > 0 ? (float) stored / max : 0f;
 
-        ctx.addDescription(Component.translatable("overlay.sunworks.solar_panel.generating", toGenerate).withStyle(ChatFormatting.GRAY));
-        ctx.addBar(new OverlayBar(Component.literal("FE:"), progress));
+        var generated = getSunlightPower(getLevel(), getBlockPos()) * 5;
+        ctx.addDescription(Component.translatable("overlay.sunworks.solar_panel.generating", generated).withStyle(ChatFormatting.GRAY));
+        ctx.addBar(new OverlayBar(Component.literal("FE:"), stored, max, false));
 
         return true;
     }
