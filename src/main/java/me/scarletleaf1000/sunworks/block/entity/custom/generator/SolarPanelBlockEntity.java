@@ -203,7 +203,7 @@ public class SolarPanelBlockEntity extends BlockEntity implements MenuProvider, 
         int max = ENERGY_STORAGE.getMaxEnergyStored();
 
         var generated = getSunlightPower(getLevel(), getBlockPos()) * 5;
-        ctx.addDescription(Component.translatable("overlay.sunworks.solar_panel.generating", generated).withStyle(ChatFormatting.GRAY));
+        ctx.addDescription(Component.translatable("overlay.sunworks.generating", generated).withStyle(ChatFormatting.GRAY));
         ctx.addBar(new OverlayBar(Component.literal("FE:"), stored, max, false));
 
         return true;

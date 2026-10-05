@@ -2,13 +2,17 @@ package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
 import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
 import me.scarletleaf1000.sunworks.block.entity.io.ConfigurableMachine;
 import me.scarletleaf1000.sunworks.block.entity.io.IOType;
 import me.scarletleaf1000.sunworks.block.entity.io.RelativeSide;
 import me.scarletleaf1000.sunworks.block.entity.io.SideConfiguration;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayBar;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
 import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverMenu;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -38,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine {
+public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine, IOverlayInfoProvider {
     private static final Set<IOType> SUPPORTED_TYPES = Set.of(IOType.ENERGY_OUTPUT);
     private static final int MAX_STORAGE = 65536;
     private static final int MAX_TRANSFER = 16384;
@@ -148,15 +152,20 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void generatePower(Level level) {
+        int fe = getPowerToGenerate(level);
+        if (fe > 0) {
+            ENERGY_STORAGE.receiveEnergy(fe, false);
+        }
+    }
+
+    private int getPowerToGenerate(Level level) {
         int fe = 0;
         for (BlockPos panelPos : connectedPanels) {
             if (level.getBlockState(panelPos).is(ModBlocks.REFLECTION_PANEL.get())) {
                 fe += 10 * getSunlightPower(level, panelPos);
             }
         }
-        if (fe > 0) {
-            ENERGY_STORAGE.receiveEnergy(fe, false);
-        }
+        return fe;
     }
 
     private void ejectEnergy(Level level, BlockPos pos) {
@@ -239,5 +248,17 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider registries) {
         super.onDataPacket(net, pkt, registries);
+    }
+
+    @Override
+    public boolean addOverlayInfo(OverlayContext ctx) {
+        int stored = ENERGY_STORAGE.getEnergyStored();
+        int max = ENERGY_STORAGE.getMaxEnergyStored();
+
+        var generated = getPowerToGenerate(getLevel());
+        ctx.addDescription(Component.translatable("overlay.sunworks.generating", generated).withStyle(ChatFormatting.GRAY));
+        ctx.addBar(new OverlayBar(Component.literal("FE:"), stored, max, false));
+
+        return true;
     }
 }
