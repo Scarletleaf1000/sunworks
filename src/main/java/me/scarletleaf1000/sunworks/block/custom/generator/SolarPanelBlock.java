@@ -63,20 +63,6 @@ public class SolarPanelBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide()) {
-            BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof SolarPanelBlockEntity solarPanelBlockEntity) {
-                player.openMenu(solarPanelBlockEntity, pos);
-            } else {
-                throw new IllegalStateException("Solar panel container provider is missing!");
-            }
-        }
-
-        return InteractionResult.sidedSuccess(level.isClientSide());
-    }
-
-    @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) return null;
 

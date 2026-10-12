@@ -12,4 +12,8 @@ public class MouseUtil {
     public static boolean isMouseOver(double mouseX, double mouseY, int x, int y, int sizeX, int sizeY) {
         return (mouseX >= x && mouseX <= x + sizeX) && (mouseY >= y && mouseY <= y + sizeY);
     }
+
+    public static boolean isMouseAboveArea(int mouseX, int mouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(mouseX, mouseY, x + offsetX, y + offsetY, width, height);
+    }
 }

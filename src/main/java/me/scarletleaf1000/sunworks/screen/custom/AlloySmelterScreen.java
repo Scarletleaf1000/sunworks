@@ -5,7 +5,6 @@ import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.screen.renderer.EnergyDisplayTooltipArea;
 import me.scarletleaf1000.sunworks.screen.widget.ConfigurationPanelWidget;
 import me.scarletleaf1000.sunworks.screen.widget.ConfigurationTabButton;
-import net.minecraft.ResourceLocationException;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -16,7 +15,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;
 
-import static me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen.isMouseAboveArea;
+import static me.scarletleaf1000.sunworks.util.MouseUtil.*;
 
 public class AlloySmelterScreen extends AbstractContainerScreen<AlloySmelterMenu> {
     private static final ResourceLocation GUI_TEXTURE =

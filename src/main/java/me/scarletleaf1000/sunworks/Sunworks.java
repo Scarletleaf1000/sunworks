@@ -10,23 +10,18 @@ import me.scarletleaf1000.sunworks.compat.ponder.PonderSunworksPlugin;
 import me.scarletleaf1000.sunworks.entity.ModEntityTypes;
 import me.scarletleaf1000.sunworks.item.ModCreativeModeTabs;
 import me.scarletleaf1000.sunworks.item.ModItems;
-import me.scarletleaf1000.sunworks.compat.ponder.PonderSunworksPlugin;
 import me.scarletleaf1000.sunworks.recipe.ModRecipes;
 import me.scarletleaf1000.sunworks.screen.ModMenuTypes;
 import me.scarletleaf1000.sunworks.worldgen.ModFeatures;
 import me.scarletleaf1000.sunworks.screen.custom.AlloySmelterScreen;
-import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverScreen;
 import me.scarletleaf1000.sunworks.screen.custom.SolarAlloySmelterScreen;
-import me.scarletleaf1000.sunworks.screen.custom.SolarPanelScreen;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
-import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,8 +35,6 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -121,8 +114,6 @@ public class Sunworks {
         public static void registerScreens(RegisterMenuScreensEvent e) {
             e.register(ModMenuTypes.ALLOY_SMELTER_MENU.get(), AlloySmelterScreen::new);
             e.register(ModMenuTypes.SOLAR_ALLOY_SMELTER_MENU.get(), SolarAlloySmelterScreen::new);
-            e.register(ModMenuTypes.SOLAR_PANEL_MENU.get(), SolarPanelScreen::new);
-            e.register(ModMenuTypes.HELIORECEIVER_MENU.get(), HelioreceiverScreen::new);
         }
 
         @SubscribeEvent

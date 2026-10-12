@@ -11,7 +11,6 @@ import me.scarletleaf1000.sunworks.block.entity.io.RelativeSide;
 import me.scarletleaf1000.sunworks.block.entity.io.SideConfiguration;
 import me.scarletleaf1000.sunworks.client.overlay.OverlayBar;
 import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
-import me.scarletleaf1000.sunworks.screen.custom.HelioreceiverMenu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,10 +21,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -42,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvider, ConfigurableMachine, IOverlayInfoProvider {
+public class HelioreceiverBlockEntity extends BlockEntity implements ConfigurableMachine, IOverlayInfoProvider {
     private static final Set<IOType> SUPPORTED_TYPES = Set.of(IOType.ENERGY_OUTPUT);
     private static final int MAX_STORAGE = 65536;
     private static final int MAX_TRANSFER = 16384;
@@ -59,16 +54,6 @@ public class HelioreceiverBlockEntity extends BlockEntity implements MenuProvide
         for (RelativeSide side : RelativeSide.values()) {
             sideConfiguration.set(side, IOType.ENERGY_OUTPUT);
         }
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return Component.translatable("block.menu.sunworks.helioreceiver");
-    }
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new HelioreceiverMenu(containerId, inventory, this);
     }
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();

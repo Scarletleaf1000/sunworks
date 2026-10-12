@@ -59,12 +59,4 @@ public class HelioreceiverBlock extends BaseEntityBlock {
         return createTickerHelper(blockEntityType, ModBlockEntities.HELIORECEIVER_BE.get(),
                 (level1, pos, state1, blockEntity) -> blockEntity.tick(level1, pos, state1));
     }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof HelioreceiverBlockEntity helioreceiver) {
-            player.openMenu(helioreceiver, pos);
-        }
-        return InteractionResult.sidedSuccess(level.isClientSide());
-    }
 }
