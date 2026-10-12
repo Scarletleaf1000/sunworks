@@ -60,6 +60,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.HELIORECEIVER.get(),
                 models().cubeAll("block/helioreceiver", modLoc("block/helioreceiver")));
 
+        directionalBlock(ModBlocks.SIMPLE_LASER_RELAY.get(), models().getExistingFile(modLoc("block/simple_laser_relay")));
+
         clusterBlock(ModBlocks.HELIOLITE_CLUSTER);
         clusterBlock(ModBlocks.LARGE_HELIOLITE_BUD);
         clusterBlock(ModBlocks.MEDIUM_HELIOLITE_BUD);

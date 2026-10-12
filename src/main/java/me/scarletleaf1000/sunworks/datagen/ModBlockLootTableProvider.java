@@ -47,7 +47,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.MODIFIER_BLOCK2.get());
         dropSelf(ModBlocks.MODIFIER_BLOCK3.get());
         dropSelf(ModBlocks.MODIFIER_BLOCK4.get());
-        dropSelf(ModBlocks.SIMPLE_LASER.get());
+        dropSelf(ModBlocks.SIMPLE_LASER_RELAY.get());
         dropSelf(ModBlocks.SUNWELL.get());
 
         dropOther(ModBlocks.DEAD_CHORUS_PLANT.get(), ModItems.CHORUS_HUSK.get());

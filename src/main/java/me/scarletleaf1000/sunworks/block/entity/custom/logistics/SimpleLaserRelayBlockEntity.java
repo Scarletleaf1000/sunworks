@@ -14,12 +14,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
-public class SimpleLaserBlockEntity extends BlockEntity {
+public class SimpleLaserRelayBlockEntity extends BlockEntity {
     private final int TRANSFER_AMOUNT = 4096;
     private final int MAX_DISTANCE = 64;
 
-    public SimpleLaserBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModBlockEntities.SIMPLE_LASER_BE.get(), pos, blockState);
+    public SimpleLaserRelayBlockEntity(BlockPos pos, BlockState blockState) {
+        super(ModBlockEntities.SIMPLE_LASER_RELAY_BE.get(), pos, blockState);
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {

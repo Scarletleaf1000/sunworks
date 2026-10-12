@@ -87,7 +87,7 @@ public class ModCreativeModeTabs {
                        output.accept(ModBlocks.MODIFIER_BLOCK3);
                        output.accept(ModBlocks.MODIFIER_BLOCK4);
 
-                       output.accept(ModBlocks.SIMPLE_LASER);
+                       output.accept(ModBlocks.SIMPLE_LASER_RELAY);
                        output.accept(ModBlocks.SUNWELL);
                     }).build());
 
