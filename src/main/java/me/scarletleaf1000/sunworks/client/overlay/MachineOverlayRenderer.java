@@ -17,6 +17,8 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.*;
 
+import static me.scarletleaf1000.sunworks.util.NumberUtil.formatNumber;
+
 public class MachineOverlayRenderer implements LayeredDraw.Layer {
 
     private static final int BG = 0xC0101010;
@@ -75,7 +77,7 @@ public class MachineOverlayRenderer implements LayeredDraw.Layer {
             if (b.isPercentage())
                 barValue = Component.literal("(" + b.getProgress() + "%)");
             else
-                barValue = Component.literal("(" + b.getCurrentValue() + "/" + b.getMaxValue() + ")");
+                barValue = Component.literal("(" + formatNumber(b.getCurrentValue()) + "/" + formatNumber(b.getMaxValue()) + ")");
             int cx = bx + font.width("|".repeat(b.getLength())) + 4;
             g.drawString(font, barValue, cx, ty, 0xAAAAAA, false);
             ty += 10;
