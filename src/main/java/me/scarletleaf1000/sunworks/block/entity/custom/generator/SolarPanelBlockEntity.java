@@ -39,15 +39,17 @@ public class SolarPanelBlockEntity extends BlockEntity implements ConfigurableMa
         sideConfiguration.set(RelativeSide.DOWN, IOType.ENERGY_OUTPUT);
     }
 
-    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private final int MAX_TRANSFER = 60;
     private final int MAX_STORAGE = 16000;
+    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private ModEnergyStorage createEnergyStorage() {
         return new ModEnergyStorage(MAX_STORAGE, MAX_TRANSFER) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                if (getLevel() != null) {
+                    getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                }
             }
         };
     }

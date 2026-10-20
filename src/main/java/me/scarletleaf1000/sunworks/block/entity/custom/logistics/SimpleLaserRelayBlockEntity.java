@@ -1,7 +1,9 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.logistics;
 
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

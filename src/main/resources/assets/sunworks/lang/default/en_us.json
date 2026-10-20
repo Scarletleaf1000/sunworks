@@ -103,5 +103,7 @@
   "gui.sunworks.io_type.fluid_input": "Fluid Input",
   "gui.sunworks.io_type.fluid_output": "Fluid Output",
 
-  "overlay.sunworks.generating": "Generating %sFE/t"
+  "overlay.sunworks.generating": "Generating %sFE/t",
+  "tooltip.sunworks.target": "Target: %s",
+  "overlay.sunworks.redstone_powered": "Powered: %s"
 }

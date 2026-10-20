@@ -56,7 +56,7 @@ public class AlloySmelterBlockEntity extends BlockEntity implements MenuProvider
         @Override
         protected void onContentsChanged(int slot) {
            setChanged();
-           if(!level.isClientSide) {
+           if (level != null && !level.isClientSide) {
                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
            }
         }
@@ -100,15 +100,18 @@ public class AlloySmelterBlockEntity extends BlockEntity implements MenuProvider
         };
     }
 
-    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+
     private final int MAX_TRANSFER = 1000;
     private final int MAX_STORAGE = 16000;
+    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private ModEnergyStorage createEnergyStorage() {
         return new ModEnergyStorage(MAX_STORAGE, MAX_TRANSFER) {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                if (getLevel() != null) {
+                    getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                }
             }
         };
     }

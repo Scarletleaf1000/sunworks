@@ -1,6 +1,8 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.generator;
 
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -22,7 +24,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-public class ReflectionPanelBlockEntity extends BlockEntity {
+public class ReflectionPanelBlockEntity extends BlockEntity implements IOverlayInfoProvider {
     @Nullable
     private BlockPos target;
 
@@ -109,5 +111,17 @@ public class ReflectionPanelBlockEntity extends BlockEntity {
 
     private static void actionBarMessage(Player player, String key, ChatFormatting color) {
         player.displayClientMessage(Component.translatable(key).withStyle(color), true);
+    }
+
+    @Override
+    public boolean addOverlayInfo(OverlayContext ctx) {
+        String targetPos = "None";
+        if (target != null) {
+            targetPos = target.getX() + " " + target.getY() + " " + target.getZ();
+        }
+
+        ctx.addDescription(Component.translatable("tooltip.sunworks.target", targetPos));
+
+        return true;
     }
 }

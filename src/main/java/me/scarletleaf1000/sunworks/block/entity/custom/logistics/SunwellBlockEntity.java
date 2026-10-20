@@ -1,14 +1,22 @@
 package me.scarletleaf1000.sunworks.block.entity.custom.logistics;
 
-import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.custom.logistics.SunwellBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
+import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyStorage;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayBar;
+import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,7 +27,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SunwellBlockEntity extends BlockEntity {
+public class SunwellBlockEntity extends BlockEntity implements IOverlayInfoProvider {
     private final int MAX_TRANSFER = 262144;
     private final int MAX_STORAGE = 1048576;
 
@@ -35,7 +43,9 @@ public class SunwellBlockEntity extends BlockEntity {
             @Override
             public void onEnergyChanged() {
                 setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                if (getLevel() != null) {
+                    getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                }
             }
 
             @Override
@@ -85,5 +95,31 @@ public class SunwellBlockEntity extends BlockEntity {
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         ENERGY_STORAGE.setEnergy(tag.getInt("helioreceiver.energy"));
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider registries) {
+        super.onDataPacket(net, pkt, registries);
+    }
+
+    @Override
+    public boolean addOverlayInfo(OverlayContext ctx) {
+        int stored = ENERGY_STORAGE.getEnergyStored();
+        int max = ENERGY_STORAGE.getMaxEnergyStored();
+
+        ctx.addDescription(Component.translatable("overlay.sunworks.redstone_powered", level.hasNeighborSignal(getBlockPos())).withStyle(ChatFormatting.GRAY));
+        ctx.addBar(new OverlayBar(Component.literal("FE:"), stored, max, false));
+
+        return true;
     }
 }
