@@ -39,7 +39,7 @@ public class LaserRelayBlockEntity extends BlockEntity {
             TRANSFER_AMOUNT = 8192;
             MAX_DISTANCE = 32;
         } else if (blockState.is(ModBlocks.DOUBLE_LASER_RELAY.get())) {
-            TRANSFER_AMOUNT = 16384;
+            TRANSFER_AMOUNT = 32768;
             MAX_DISTANCE = 64;
         } else {
             TRANSFER_AMOUNT = 0;
