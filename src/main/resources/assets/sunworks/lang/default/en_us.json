@@ -50,7 +50,8 @@
   "block.sunworks.anchor_casing": "Anchor Casing",
   "block.sunworks.corona_tap": "Corona Tap",
   "block.sunworks.energy_port": "Energy Port",
-  "block.sunworks.simple_laser_relay": "Simple Laser Relay",
+  "block.sunworks.single_laser_relay": "Single Laser Relay",
+  "block.sunworks.double_laser_relay": "Double Laser Relay",
   "block.sunworks.sunwell": "Sunwell",
 
   "tooltip.sunworks.reflection_panel.description": "Reflects sunlight toward a linked block.",

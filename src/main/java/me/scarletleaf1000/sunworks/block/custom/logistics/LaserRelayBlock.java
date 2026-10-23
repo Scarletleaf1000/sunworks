@@ -1,8 +1,10 @@
 package me.scarletleaf1000.sunworks.block.custom.logistics;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
-import me.scarletleaf1000.sunworks.block.entity.custom.logistics.SimpleLaserRelayBlockEntity;
+import me.scarletleaf1000.sunworks.block.entity.custom.logistics.LaserRelayBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -25,8 +27,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class SimpleLaserRelayBlock extends BaseEntityBlock {
-    public static final MapCodec<SimpleLaserRelayBlock> CODEC = simpleCodec(SimpleLaserRelayBlock::new);
+public class LaserRelayBlock extends BaseEntityBlock {
+    public static final MapCodec<LaserRelayBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            propertiesCodec(),
+            Codec.INT.fieldOf("transferAmount").forGetter(block -> block.transferAmount),
+            Codec.INT.fieldOf("maxDistance").forGetter(block -> block.maxDistance)
+    ).apply(instance, LaserRelayBlock::new));
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     private static final Map<Direction, VoxelShape> SHAPES = new EnumMap<>(Map.of(
             Direction.UP,    Block.box(0, 0, 0, 16, 3, 16),     // plate on floor
@@ -37,9 +43,14 @@ public class SimpleLaserRelayBlock extends BaseEntityBlock {
             Direction.EAST,  Block.box(0, 0, 0, 3, 16, 16)
     ));
 
-    public SimpleLaserRelayBlock(Properties properties) {
+    private final int transferAmount;
+    private final int maxDistance;
+
+    public LaserRelayBlock(Properties properties, int transferAmount, int maxDistance) {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.DOWN));
+        this.transferAmount = transferAmount;
+        this.maxDistance = maxDistance;
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -74,13 +85,13 @@ public class SimpleLaserRelayBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new SimpleLaserRelayBlockEntity(blockPos, blockState);
+        return new LaserRelayBlockEntity(blockPos, blockState);
     }
 
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) return null;
 
-        return createTickerHelper(blockEntityType, ModBlockEntities.SIMPLE_LASER_RELAY_BE.get(),
+        return createTickerHelper(blockEntityType, ModBlockEntities.LASER_RELAY_BE.get(),
                 (level1, pos, state1, blockEntity) -> blockEntity.tick(level1, pos, state1));
     }
 }

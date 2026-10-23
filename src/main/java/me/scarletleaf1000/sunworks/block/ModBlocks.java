@@ -3,7 +3,7 @@ package me.scarletleaf1000.sunworks.block;
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.block.custom.BuddingHelioliteBlock;
 import me.scarletleaf1000.sunworks.block.custom.ModifierBlock;
-import me.scarletleaf1000.sunworks.block.custom.logistics.SimpleLaserRelayBlock;
+import me.scarletleaf1000.sunworks.block.custom.logistics.LaserRelayBlock;
 import me.scarletleaf1000.sunworks.block.custom.logistics.SunwellBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.AlloySmelterBlock;
 import me.scarletleaf1000.sunworks.block.custom.processor.SolarAlloySmelterBlock;
@@ -174,15 +174,29 @@ public class ModBlocks {
     public static final DeferredBlock<ModifierBlock> MODIFIER_BLOCK4 = registerBlock("modifier4",
             () -> new ModifierBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), 0,0,0.75f,0.7f));
 
-    public static final DeferredBlock<Block> SIMPLE_LASER_RELAY = registerBlock("simple_laser_relay",
-            () -> new SimpleLaserRelayBlock(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<Block> SINGLE_LASER_RELAY = registerBlock("single_laser_relay",
+            () -> new LaserRelayBlock(BlockBehaviour.Properties.of()
                     .strength(2.5f, 3f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()
-                    .noOcclusion()
+                    .noOcclusion(),
+                    8192,
+                    32
             ),
             block -> new DescriptiveBlockItem(block, new Item.Properties(),
                     Component.translatable("tooltip.sunworks.laser.description")));
+    public static final DeferredBlock<Block> DOUBLE_LASER_RELAY = registerBlock("double_laser_relay",
+            () -> new LaserRelayBlock(BlockBehaviour.Properties.of()
+                    .strength(3.5f, 3.5f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion(),
+                    32768,
+                    64
+            ),
+            block -> new DescriptiveBlockItem(block, new Item.Properties(),
+                    Component.translatable("tooltip.sunworks.laser.description")));
+
 
     public static final DeferredBlock<Block> SUNWELL = registerBlock("sunwell",
             () -> new SunwellBlock(BlockBehaviour.Properties.of()

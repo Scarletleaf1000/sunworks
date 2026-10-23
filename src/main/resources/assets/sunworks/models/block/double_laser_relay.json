@@ -1,9 +1,10 @@
 {
+	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "sunworks:block/simple_laser_relay",
-		"particle": "sunworks:block/simple_laser_relay"
+		"0": "sunworks:block/double_laser_relay",
+		"particle": "sunworks:block/double_laser_relay"
 	},
 	"elements": [
 		{
@@ -30,12 +31,12 @@
 		},
 		{
 			"from": [5, 2, 5],
-			"to": [11, 4, 11],
+			"to": [11, 6, 11],
 			"faces": {
-				"north": {"uv": [14, 0.5, 13, 3.5], "rotation": 90, "texture": "#0"},
-				"east": {"uv": [14, 0.5, 13, 3.5], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [13, 0.5, 14, 3.5], "rotation": 90, "texture": "#0"},
-				"west": {"uv": [13, 0.5, 14, 3.5], "rotation": 90, "texture": "#0"},
+				"north": {"uv": [15, 0.5, 13, 3.5], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [15, 0.5, 13, 3.5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [13, 0.5, 15, 3.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [13, 0.5, 15, 3.5], "rotation": 90, "texture": "#0"},
 				"up": {"uv": [9.5, 0.5, 12.5, 3.5], "texture": "#0"}
 			}
 		},
@@ -51,6 +52,5 @@
 				"down": {"uv": [7.5, 2.5, 9, 9.5], "texture": "#0"}
 			}
 		}
-	],
-	"display": {}
+	]
 }

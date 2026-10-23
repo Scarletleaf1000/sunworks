@@ -2,13 +2,14 @@ package me.scarletleaf1000.sunworks.block.entity.custom.logistics;
 
 import me.scarletleaf1000.sunworks.beams.BeamUtil;
 import me.scarletleaf1000.sunworks.beams.ServerBeamManager;
+import me.scarletleaf1000.sunworks.block.ModBlocks;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
-import me.scarletleaf1000.sunworks.block.entity.api.IOverlayInfoProvider;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
-import me.scarletleaf1000.sunworks.client.overlay.OverlayContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,15 +24,27 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.UUID;
 
-public class SimpleLaserRelayBlockEntity extends BlockEntity {
-    private final int TRANSFER_AMOUNT = 4096;
-    private final int MAX_DISTANCE = 64;
+public class LaserRelayBlockEntity extends BlockEntity {
+    private final int TRANSFER_AMOUNT;
+    private final int MAX_DISTANCE;
 
     private UUID beamId;
     private Vec3 lastHitLoc;
 
-    public SimpleLaserRelayBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModBlockEntities.SIMPLE_LASER_RELAY_BE.get(), pos, blockState);
+    public LaserRelayBlockEntity(BlockPos pos, BlockState blockState) {
+        super(ModBlockEntities.LASER_RELAY_BE.get(), pos, blockState);
+
+
+        if (blockState.is(ModBlocks.SINGLE_LASER_RELAY.get())) {
+            TRANSFER_AMOUNT = 8192;
+            MAX_DISTANCE = 32;
+        } else if (blockState.is(ModBlocks.DOUBLE_LASER_RELAY.get())) {
+            TRANSFER_AMOUNT = 16384;
+            MAX_DISTANCE = 64;
+        } else {
+            TRANSFER_AMOUNT = 0;
+            MAX_DISTANCE = 0;
+        }
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
@@ -73,6 +86,12 @@ public class SimpleLaserRelayBlockEntity extends BlockEntity {
             spawnBeam(serverLevel, beamStartVec, hitLoc);
         }
         lastHitLoc = hitLoc;
+        if (shouldShow) {
+            if (level.getGameTime() % 40 == 0)
+                level.playSeededSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BEACON_AMBIENT,
+                    SoundSource.BLOCKS, 0.15f, 1.25f, level.random.nextLong()
+            );
+        }
 
         if (!ModEnergyUtil.doesBlockHaveEnergyStorage(toPos, beamDir.getOpposite(), serverLevel)) return;
 
