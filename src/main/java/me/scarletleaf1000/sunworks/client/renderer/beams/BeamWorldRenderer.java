@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import me.scarletleaf1000.sunworks.Sunworks;
 import me.scarletleaf1000.sunworks.beams.AbstractBeam;
+import me.scarletleaf1000.sunworks.client.renderer.ModRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -33,8 +33,8 @@ public class BeamWorldRenderer {
         PoseStack poseStack = event.getPoseStack();
         MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
 
-        // Use lightning or translucent render type for glowing effect
-        VertexConsumer consumer = bufferSource.getBuffer(RenderType.lightning());
+        // Custom lightning-based type with depth biasing to prevent z-fighting
+        VertexConsumer consumer = bufferSource.getBuffer(ModRenderTypes.BEAM);
 
         poseStack.pushPose();
         // Shift matrix origin from absolute world (0,0,0) to current Camera Position
@@ -46,6 +46,6 @@ public class BeamWorldRenderer {
         }
 
         poseStack.popPose();
-        bufferSource.endBatch(RenderType.lightning());
+        bufferSource.endBatch(ModRenderTypes.BEAM);
     }
 }
