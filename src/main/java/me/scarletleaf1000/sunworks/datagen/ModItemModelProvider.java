@@ -82,6 +82,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                         .end()
                     .end();
         withExistingParent(ModBlocks.REFLECTION_PANEL.getId().getPath(), modLoc("block/reflection_panel_base"));
+        withExistingParent(ModBlocks.SIMPLE_LASER_RELAY.getId().getPath(), modLoc("block/simple_laser_relay"));
     }
 
     private void clusterItem(DeferredBlock<? extends Block> block) {
