@@ -204,6 +204,8 @@ public abstract class AbstractBeam {
     private void addVertex(VertexConsumer consumer, PoseStack.Pose pose, Vec3 pos, Vec3 normal, int alpha, int blockLight, int skyLight) {
         consumer.addVertex(pose, (float) pos.x, (float) pos.y, (float) pos.z)
                 .setColor(red, green, blue, alpha)
+                .setUv(0.0F, 0.0F)
+                .setUv1(0, 0)
                 .setUv2(blockLight, skyLight)
                 .setNormal(pose, (float) normal.x, (float) normal.y, (float) normal.z);
     }
