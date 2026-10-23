@@ -14,7 +14,7 @@ public class BeamUtil {
     }
 
     public static TemporaryBeam createTemporaryOrangeBeam(ServerLevel level, Vec3 start, Vec3 end, float alpha, float radius, int maxAge, float targetAlpha) {
-        return createTemporaryBeam(level, start, end, 255, 116, 33, alpha, radius, maxAge, targetAlpha);
+        return createTemporaryBeam(level, start, end, 255, 100, 0, alpha, radius, maxAge, targetAlpha);
     }
 
     public static TemporaryBeam createTemporaryBeam(ServerLevel level, Vec3 start, Vec3 end, int red, int green, int blue, float alpha, float radius, int maxAge, float targetAlpha) {
@@ -28,7 +28,7 @@ public class BeamUtil {
     }
 
     public static PersistentBeam createPersistentOrangeBeam(ServerLevel level, Vec3 start, Vec3 end, float alpha, float radius) {
-        return createPersistentBeam(level, start, end, 255, 116, 33, alpha, radius);
+        return createPersistentBeam(level, start, end, 255, 100, 0, alpha, radius);
     }
 
     public static PersistentBeam createPersistentBeam(ServerLevel level, Vec3 start, Vec3 end, int red, int green, int blue, float alpha, float radius) {
