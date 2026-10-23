@@ -99,7 +99,8 @@ public class LaserRelayBlockEntity extends BlockEntity {
     }
 
     private void spawnBeam(ServerLevel serverLevel, Vec3 startVec, Vec3 hitLoc) {
-        var beam = BeamUtil.createPersistentOrangeBeam(serverLevel, startVec, hitLoc);
+        var beamAlpha = this.getBlockState().is(ModBlocks.DOUBLE_LASER_RELAY.get()) ? 0.7f : 0.9f;
+        var beam = BeamUtil.createPersistentOrangeBeam(serverLevel, startVec, hitLoc, beamAlpha, 0.1f);
         beamId = beam.getId();
     }
 
