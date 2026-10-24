@@ -3,6 +3,7 @@ package me.scarletleaf1000.sunworks.block.entity.custom.logistics;
 import me.scarletleaf1000.sunworks.beams.BeamUtil;
 import me.scarletleaf1000.sunworks.beams.ServerBeamManager;
 import me.scarletleaf1000.sunworks.block.ModBlocks;
+import me.scarletleaf1000.sunworks.block.custom.logistics.LaserRelayBlock;
 import me.scarletleaf1000.sunworks.block.entity.ModBlockEntities;
 import me.scarletleaf1000.sunworks.block.entity.energy.ModEnergyUtil;
 import net.minecraft.core.BlockPos;
@@ -34,17 +35,21 @@ public class LaserRelayBlockEntity extends BlockEntity {
     public LaserRelayBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.LASER_RELAY_BE.get(), pos, blockState);
 
-
-        if (blockState.is(ModBlocks.SINGLE_LASER_RELAY.get())) {
-            TRANSFER_AMOUNT = 8192;
-            MAX_DISTANCE = 32;
-        } else if (blockState.is(ModBlocks.DOUBLE_LASER_RELAY.get())) {
-            TRANSFER_AMOUNT = 32768;
-            MAX_DISTANCE = 64;
+        if (blockState.getBlock() instanceof LaserRelayBlock laserRelayBlock) {
+            TRANSFER_AMOUNT = laserRelayBlock.getTransferAmount();
+            MAX_DISTANCE = laserRelayBlock.getMaxDistance();
         } else {
             TRANSFER_AMOUNT = 0;
             MAX_DISTANCE = 0;
         }
+
+//        if (blockState.is(ModBlocks.SINGLE_LASER_RELAY.get())) {
+//            TRANSFER_AMOUNT = 8192;
+//            MAX_DISTANCE = 32;
+//        } else if (blockState.is(ModBlocks.DOUBLE_LASER_RELAY.get())) {
+//            TRANSFER_AMOUNT = 32768;
+//            MAX_DISTANCE = 64;
+//        }
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
