@@ -23,8 +23,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.HELIOLITE_BLOCK);
-        blockWithItem(ModBlocks.BUDDING_HELIOLITE);
+        randomRotationBlock(ModBlocks.HELIOLITE_BLOCK);
+        randomRotationBlock(ModBlocks.BUDDING_HELIOLITE);
 
         blockWithItem(ModBlocks.CINDERITE_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_CINDERITE_ORE);
@@ -37,7 +37,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.ELECTRUM_BLOCK);
         blockWithItem(ModBlocks.CINDERSTEEL_BLOCK);
         blockWithItem(ModBlocks.VOIDSTEEL_BLOCK);
-        blockWithItem(ModBlocks.SIMPLE_MACHINE_CASING);
         blockWithItem(ModBlocks.ADVANCED_MACHINE_CASING);
         blockWithItem(ModBlocks.ULTIMATE_MACHINE_CASING);
 
@@ -51,9 +50,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //blockWithItem(ModBlocks.VOLATILE_ANCHOR);
         //blockWithItem(ModBlocks.ANCHOR_CASING);
         //simpleBlockWithItem(ModBlocks.CORONA_TAP_INTERFACE.get(), cubeAll(ModBlocks.CORONA_TAP_INTERFACE.get()));
-
-        horizontalFaceBlock(ModBlocks.SOLAR_ALLOY_SMELTER, true, true);
-        horizontalFaceBlock(ModBlocks.ALLOY_SMELTER, true, false);
+        simpleBlockWithItem(ModBlocks.SIMPLE_MACHINE_CASING.get(), models().getExistingFile(modLoc("block/simple_machine_casing")));
+        simpleBlockWithItem(ModBlocks.ALLOY_SMELTER.get(), models().getExistingFile(modLoc("block/alloy_smelter")));
+        simpleBlockWithItem(ModBlocks.SOLAR_ALLOY_SMELTER.get(), models().getExistingFile(modLoc("block/solar_alloy_smelter")));
 
         simpleBlock(ModBlocks.SOLAR_PANEL.get(), models().getExistingFile(modLoc("block/solar_panel")));
         simpleBlock(ModBlocks.REFLECTION_PANEL.get(), models().getExistingFile(modLoc("block/reflection_panel_base")));
@@ -120,5 +119,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(DeferredBlock<? extends Block> block) {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
+    }
+
+    private void randomRotationBlock(DeferredBlock<? extends Block> block) {
+        ModelFile blockModel = cubeAll(block.get());
+        getVariantBuilder(block.get())
+                .partialState()
+                .setModels(
+                        new ConfiguredModel(blockModel, 0, 0, false),   // 0 degrees rotation
+                        new ConfiguredModel(blockModel, 0, 90, false),  // 90 degrees Y-rotation
+                        new ConfiguredModel(blockModel, 0, 180, false), // 180 degrees Y-rotation
+                        new ConfiguredModel(blockModel, 0, 270, false)  // 270 degrees Y-rotation
+                );
+
+        simpleBlockItem(block.get(), blockModel);
     }
 }

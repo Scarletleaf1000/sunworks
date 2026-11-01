@@ -26,12 +26,11 @@ import java.util.stream.Stream;
 
 public class SolarPanelBlock extends BaseEntityBlock {
     public static final MapCodec<SolarPanelBlock> CODEC = simpleCodec(SolarPanelBlock::new);
-    private static final VoxelShape SHAPE = Shapes.join(Block.box(0, 7, 0, 16, 9, 16), Stream.of(
-            Block.box(4, 0, 4, 12, 1, 12),
-            Block.box(5, 1, 5, 11, 2, 11),
-            Block.box(7, 2, 7, 9, 6, 9),
-            Block.box(5, 6, 5, 11, 7, 11)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get(), BooleanOp.OR);
+    private static final VoxelShape SHAPE = Stream.of(
+            Block.box(4, 0, 4, 12, 2, 12),
+            Block.box(6, 2, 6, 10, 6, 10),
+            Block.box(1, 6, 1, 15, 7, 15)
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public SolarPanelBlock(Properties properties) {
         super(properties);

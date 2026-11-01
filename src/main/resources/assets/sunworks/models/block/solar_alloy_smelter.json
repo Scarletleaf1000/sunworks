@@ -1,0 +1,6 @@
+{
+  "parent": "sunworks:block/alloy_smelter",
+  "textures": {
+    "top": "sunworks:block/solar_alloy_smelter_top"
+  }
+}
