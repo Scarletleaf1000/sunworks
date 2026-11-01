@@ -94,4 +94,12 @@ public class LaserRelayBlock extends BaseEntityBlock {
         return createTickerHelper(blockEntityType, ModBlockEntities.LASER_RELAY_BE.get(),
                 (level1, pos, state1, blockEntity) -> blockEntity.tick(level1, pos, state1));
     }
+
+    public int getTransferAmount() {
+        return transferAmount;
+    }
+
+    public int getMaxDistance() {
+        return maxDistance;
+    }
 }
